@@ -13,11 +13,11 @@
         </ul>
     {% endif %}
 
-    <form id="masters-application-form" action="" method="post" enctype="multipart/form-data" style="margin-top: 50px; margin-bottom: 50px;">
+    <form id="masters-application-form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- Step 1: Personal Information -->
-         <div class="row justify-content-center">
+         <div class="row justify-content-center mt-5">
             <div class="col-6">
                 <div class="form-step" data-step="1">
                     <h3 class="text-center">Personal Information</h3>
@@ -28,8 +28,8 @@
         </div>
 
         <!-- Step 2: Documents Upload -->
-         <div class="row justify-content-center">
-          <div class="col-lg-6 col-md-12 col-sm-12">
+         <div class="row justify-content-center mt-5 mb-5">
+          <div class="col-6">
             <div class="form-step" data-step="2" style="display: none;">
                 <h3>Personal Documents</h3>
                 {{ document_upload_form.as_p }}
@@ -41,8 +41,8 @@
          </div>
         
         <!-- Step 3: Contact and Address -->
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
                 <div class="form-step" data-step="3" style="display: none;">
                     <h3>Contact and Address</h3>
                     {{ contact_and_address_form.as_p }}
@@ -53,8 +53,8 @@
         </div>
 
         <!-- Step 4: Educational Background -->
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
                 <div class="form-step" data-step="4" style="display: none;">
                     <h3>Educational Background</h3>
                     {{ educational_form.as_p }}
@@ -65,8 +65,8 @@
         </div>
 
         <!-- Step 5: Educational Documents -->
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
                 <div class="form-step" data-step="5" style="display: none;">
                     <h3>Educational Documents</h3>
                     {{ documents_upload_form.as_p }}
@@ -79,8 +79,8 @@
        
 
         <!-- Step 6: Other Information -->
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
                 <div class="form-step" data-step="6" style="display: none;">
                     <h3>Other Information</h3>
                     {{ other_info_form.as_p }}
