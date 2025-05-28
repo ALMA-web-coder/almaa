@@ -13,32 +13,31 @@
         </ul>
     {% endif %}
 
-    <form id="masters-application-form" action="" method="post" enctype="multipart/form-data" style="margin-top: 40px; margin-bottom: 40px;">
+    <form id="masters-application-form" action="" method="post" enctype="multipart/form-data" style="margin-top:40px; margin-bottom:40px;">
         {% csrf_token %}
 
         <!-- Step 1: Personal Information -->
-         <div class="row justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="form-step" data-step="1">
                     <h3 class="text-center">Personal Information</h3>
-                       {{ personal_info_form.as_p }}
+                    {{ personal_info_form.as_p }}
                     <button type="button" class="btn btn-primary next-step">Next</button>
-               </div>
+                </div>
             </div>
         </div>
 
         <!-- Step 2: Documents Upload -->
-         <div class="row justify-content-center">
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="form-step" data-step="2" style="display: none;">
-                <h3>Personal Documents</h3>
-                {{ documents_upload_form.as_p }}
-                <button type="button" class="btn btn-secondary prev-step">Previous</button>
-                <button type="button" class="btn btn-primary next-step">Next</button>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="form-step" data-step="2" style="display: none;">
+                    <h3>Personal Documents</h3>
+                    {{ document_upload_form.as_p }}
+                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                    <button type="button" class="btn btn-primary next-step">Next</button>
+                </div>
             </div>
-    
-          </div>
-         </div>
+        </div>
         
         <!-- Step 3: Contact and Address -->
         <div class="row justify-content-center">
@@ -69,29 +68,17 @@
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="form-step" data-step="5" style="display: none;">
                     <h3>Educational Documents</h3>
-                    {{ document_upload_form.as_p }}
+                    {{ documents_upload_form.as_p }}
                     <button type="button" class="btn btn-secondary prev-step">Previous</button>
                     <button type="button" class="btn btn-primary next-step">Next</button>
                 </div>
             </div>
         </div>
 
-        <!-- Step 6: Work Experience -->
+        <!-- Step 6: Other Information -->
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="form-step" data-step="6" style="display: none;">
-                    <h3>Work Experience</h3>
-                    {{ work_experience_form.as_p }}
-                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
-                    <button type="button" class="btn btn-primary next-step">Next</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 7: Other Information -->
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="form-step" data-step="7" style="display: none;">
                     <h3>Other Information</h3>
                     {{ other_info_form.as_p }}
                     <button type="button" class="btn btn-secondary prev-step">Previous</button>
