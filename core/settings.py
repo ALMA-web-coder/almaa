@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 """""
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.1.99', '127.0.0.1', 'alma.ac.zw']
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -163,9 +164,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",  
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles"
-##LOgging life
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+##LOgging life
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
