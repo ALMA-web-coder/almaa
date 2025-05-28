@@ -81,6 +81,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+"""""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME'),        
+        'USER': os.environ.get('DB_USER'),      
+        'PASSWORD':os.environ.get('DB_PASSWORD'),   
+        'HOST': 'localhost',                   
+        'PORT': '3306',                        
+    }
+}
+"""""
 
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -97,6 +109,18 @@ DATABASES = {
 }
 
 
+"""""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'almadb',                
+        'USER': 'Moses',                      
+        'PASSWORD': 'AlmaUfa04028#25;',          
+        'HOST': 'localhost',                  
+        'PORT': '3306',                       
+    }
+}
+"""""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -191,9 +215,17 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL'),
 
 
 PAYNOW = {
-  'INTEGRATION_ID' : os.environ.get('PAYNOW_INTEGRATION_ID'),
-  'INTEGRATION_KEY' : os.environ.get('PAYNOW_INTEGRATION_KEY'),
-  'RESULT_URL' : os.environ.get('PAYNOW_RESULT_URL'),
-  'RETURN_URL' : os.environ.get('PAYNOW_RETURN_URL')
+    'INTEGRATION_ID': '19870',
+    'INTEGRATION_KEY': '22ea8dda-c882-4f1c-8f08-beec323076a2',
+    'RESULT_URL': 'http://127.0.0.1:8000/apply/?step=10',
+    'RETURN_URL': 'http://127.0.0.1:8000/apply/?step=10'
+}
+"""""
+PAYNOW = {
+  'INTEGRATION_ID' : os.environ.get('INTEGRATION_ID'),
+  'INTEGRATION_KEY' : os.environ.get('INTEGRATION_KEY'),
+  'RESULT_URL' : os.environ.get('RESULT_URL'),
+  'RETURN_URL' : os.environ.get('RETURN_URL')
 }
 
+"""""

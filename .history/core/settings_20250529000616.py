@@ -81,6 +81,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+"""""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME'),        
+        'USER': os.environ.get('DB_USER'),      
+        'PASSWORD':os.environ.get('DB_PASSWORD'),   
+        'HOST': 'localhost',                   
+        'PORT': '3306',                        
+    }
+}
+"""""
 
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -97,6 +109,18 @@ DATABASES = {
 }
 
 
+"""""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'almadb',                
+        'USER': 'Moses',                      
+        'PASSWORD': 'AlmaUfa04028#25;',          
+        'HOST': 'localhost',                  
+        'PORT': '3306',                       
+    }
+}
+"""""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
