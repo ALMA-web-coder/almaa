@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+Hi {{ user.username }},
+
+Please click the link below to activate your account:
+<a href="{{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activate Account</a>
+If you think, it's not you, then just ignore this email.
+
+{% endautoescape %}

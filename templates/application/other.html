@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-maroon text-white">
+                    <h4 class="mb-0">Additional Information</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'application_view' %}?step=8">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="{{ form.how_did_you_hear_about_ALMA.id_for_label }}" class="form-label">
+                                <i class="fas fa-info-circle me-2"></i>How did you hear about ALMA?
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="{{ form.how_did_you_hear_about_ALMA.id_for_label }}" 
+                                   name="{{ form.how_did_you_hear_about_ALMA.html_name }}"
+                                   value="{{ form.how_did_you_hear_about_ALMA.value|default:'' }}"
+                                   placeholder="Enter how you heard about ALMA">
+                            {% if form.how_did_you_hear_about_ALMA.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.how_did_you_hear_about_ALMA.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.additional_remarks.id_for_label }}" class="form-label">
+                                <i class="fas fa-comment me-2"></i>Additional Remarks
+                            </label>
+                            <textarea class="form-control" 
+                                      id="{{ form.additional_remarks.id_for_label }}" 
+                                      name="{{ form.additional_remarks.html_name }}"
+                                      rows="4"
+                                      placeholder="Enter any additional remarks">{{ form.additional_remarks.value|default:'' }}</textarea>
+                            {% if form.additional_remarks.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.additional_remarks.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'application_view' %}?step=7" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Previous
+                            </a>
+                            <button type="submit" class="btn btn-maroon">
+                                Next<i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-maroon {
+        background-color: maroon;
+    }
+    .btn-maroon {
+        background-color: maroon;
+        color: white;
+        border-color: maroon;
+    }
+    .btn-maroon:hover {
+        background-color: #800000;
+        border-color: #800000;
+        color: white;
+    }
+    .form-control:focus {
+        border-color: maroon;
+        box-shadow: 0 0 0 0.2rem rgba(128, 0, 0, 0.25);
+    }
+    .card {
+        border-radius: 10px;
+    }
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+    .form-control {
+        border-radius: 5px;
+        padding: 0.75rem;
+    }
+    textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Section</title>
+</head>
+<body>
+    <h1>Latest News</h1>
+    {% for news_item in news_items %}
+    <div class="news-card">
+        <h2>{{ news_item.title }}</h2>
+        <p>By: {{ news_item.author }} on {{ news_item.date_posted }}</p>
+        <p>{{ news_item.abstract|truncatewords:30 }} <a href="{% url 'news_detail' news_item.id %}">Read more</a></p>
+    </div>
+    {% endfor %}
+</body>
+</html>

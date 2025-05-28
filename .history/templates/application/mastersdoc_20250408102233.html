@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Educational certificates</title>
+
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgba(128, 0, 32, 0.1);
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color:rgb(128,0,32);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 5% auto;
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgb(255, 255, 255);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color:rgb(128,0,32);
+            margin-top: 20px;
+            font-size: 1.8em; 
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1; 
+        }
+
+        input[type="file"] {
+            width: 100%; 
+            margin-top: 5px;
+            padding: 10px;
+            border: 1px rgb(212,126,126);
+            border-radius: 4px;
+            background-color: rgba(128,0,32,0.2); 
+            color:rgb(128,0,32);
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:focus {
+            border-color:rgb(212,126,126);
+            outline: none; 
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between; 
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color:rgb(114, 33, 33);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px; 
+            flex: 1;
+            margin-right: 5px; 
+        }
+
+        .btn:last-child {
+            margin-right: 0;
+        }
+
+        .btn:hover {
+            background-color:rgb(132, 32, 32);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color:rgb(253, 254, 255);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        
+        @media (max-width: 768px) { /* Tablet */
+            .container {
+                margin: 10% auto;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .btn {
+                font-size: 14px;
+                margin-right: 0;
+                padding: 8px;
+            }
+
+            footer p {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) { 
+            .container {
+                margin: 10% auto; 
+            }
+
+            h2 {
+                font-size: 1.2em; 
+            }
+
+            label {
+                font-size: 14px; 
+            }
+
+            input[type="file"], .btn {
+                font-size: 14px; 
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Your Educational certificates</h2>
+        
+        <form method="post" enctype="multipart/form-data" action="{% url 'authentication:application_view' %}?step=6">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                {{ form.as_p }} 
+            </div>
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert">
+                        <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Upload</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}6 of 9</p> 
+    </footer>
+</body>
+</html>

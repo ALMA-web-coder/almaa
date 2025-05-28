@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Information</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+  
+</head>
+<body>
+    <div class="container">
+        <h2>Other Information</h2>
+        <form method="post" action="{% url 'application_view' %}?step=8">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Submit Application</button>
+
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}8 of 9</p> 
+    </footer>
+</body>
+</html>

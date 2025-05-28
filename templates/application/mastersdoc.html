@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="mb-0">Upload Educational Documents</h2>
+                        <span class="badge bg-light text-primary">Step 6 of 9</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="logo-container text-center mb-4">
+                        <img src="{% static 'images/logo.png' %}" class="logo me-3" style="width:13%;" alt="Logo NUST">
+                        <img src="{% static 'images/alma.png' %}" class="logos" style="width:13%;" alt="Logo ALMA">
+                    </div>
+                    
+                    <form method="post" enctype="multipart/form-data" action="{% url 'application_view' %}?step=6" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.transcript.id_for_label }}" class="form-label fw-bold">Transcript</label>
+                                    <div class="input-group">
+                                        {{ form.transcript }}
+                                        <label class="input-group-text" for="{{ form.transcript.id_for_label }}">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </label>
+                                    </div>
+                                    {% if form.transcript.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.transcript.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">Accepted formats: PDF, JPG, PNG (Max 5MB)</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.degree_certificate.id_for_label }}" class="form-label fw-bold">Degree Certificate</label>
+                                    <div class="input-group">
+                                        {{ form.degree_certificate }}
+                                        <label class="input-group-text" for="{{ form.degree_certificate.id_for_label }}">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </label>
+                                    </div>
+                                    {% if form.degree_certificate.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.degree_certificate.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">Accepted formats: PDF, JPG, PNG (Max 5MB)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.CV.id_for_label }}" class="form-label fw-bold">CV</label>
+                                    <div class="input-group">
+                                        {{ form.CV }}
+                                        <label class="input-group-text" for="{{ form.CV.id_for_label }}">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </label>
+                                    </div>
+                                    {% if form.CV.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.CV.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.a_level_certificate.id_for_label }}" class="form-label fw-bold">A-Level Certificate</label>
+                                    <div class="input-group">
+                                        {{ form.a_level_certificate }}
+                                        <label class="input-group-text" for="{{ form.a_level_certificate.id_for_label }}">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </label>
+                                    </div>
+                                    {% if form.a_level_certificate.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.a_level_certificate.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.o_level_certificate.id_for_label }}" class="form-label fw-bold">O-Level Certificate</label>
+                                    <div class="input-group">
+                                        {{ form.o_level_certificate }}
+                                        <label class="input-group-text" for="{{ form.o_level_certificate.id_for_label }}">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </label>
+                                    </div>
+                                    {% if form.o_level_certificate.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.o_level_certificate.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="?step=5" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i>Previous
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Upload Documents <i class="fas fa-upload ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        border: none;
+    }
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+    .form-control {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .input-group-text {
+        background-color: #f8f9fa;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+    }
+    .btn-primary, .btn-secondary {
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+    }
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    .logo-container {
+        margin-bottom: 2rem;
+    }
+    .logo, .logos {
+        transition: transform 0.3s ease;
+    }
+    .logo:hover, .logos:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="mt-4">Work Experience</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=7"> 
+            {% csrf_token %}
+            <div class="formset">
+                {{ formset.management_form }}
+                {% for form in formset.forms %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Work Experience {{ forloop.counter }}</h5>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ form.company.label(class="form-label") }}
+                                    {{ form.company(class="form-control") }}
+                                    {{ form.company.errors }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ form.role.label(class="form-label") }}
+                                    {{ form.role(class="form-control") }}
+                                    {{ form.role.errors }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ form.start_date.label(class="form-label") }}
+                                    {{ form.start_date(class="form-control") }}
+                                    {{ form.start_date.errors }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ form.end_date.label(class="form-label") }}
+                                    {{ form.end_date(class="form-control") }}
+                                    {{ form.end_date.errors }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form.description.label(class="form-label") }}
+                                {{ form.description(class="form-control") }}
+                                {{ form.description.errors }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Save Work Experience</button>
+            <a href="{% url 'application_view' %}?step=8" class="btn btn-secondary">Next Step</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 class="mb-4">Complete Your Payment</h1>
+
+<div class="par mb-4">
+   <p>You are about to pay an application fee of <strong>$20</strong>.</p>
+   <p>Your payment will be processed by Paynow.</p>
+</div>
+
+{% if messages %}
+    <ul class="alert alert-info">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}{% endif %}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="POST" action="{% url 'application_view' %}?step=9">
+    
+    {% csrf_token %}
+            
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required placeholder="Enter your email address">
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Mobile Number:</label>
+        <input type="tel" name="phone" id="phone" required placeholder="Enter your mobile number" pattern="^[0-9]{10,15}$" title="Please enter a valid mobile number">
+    </div>
+
+    <div class="form-group">
+        <button type="submit">Pay Application Fee</button>
+    </div>
+</form>
+
+<p>Note: Payment will be processed via EcoCash. You will receive payment instructions on your mobile phone.</p>
+</div>
+
+{% endblock %}

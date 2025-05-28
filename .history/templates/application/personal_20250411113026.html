@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2 class="mb-4">Work Experience</h2>
+
+<form method="post" action="{% url 'application_view' %}?step=7"> 
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+    {% for form in formset %}
+        <div class="form-group mb-4">
+            <h4>Work Experience {{ forloop.counter }}</h4>
+
+            <label for="{{ form.employer.id_for_label }}">Employer:</label>
+            <input type="text"
+                   id="{{ form.employer.id_for_label }}"
+                   name="{{ form.employer.name }}"
+                   class="form-control"
+                   value="{{ form.employer.value|default:'' }}">
+            {% if form.employer.errors %}
+                <div class="alert alert-danger mt-1">{{ form.employer.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.work_details.id_for_label }}">Work Details:</label>
+            <textarea id="{{ form.work_details.id_for_label }}"
+                      name="{{ form.work_details.name }}"
+                      class="form-control">{{ form.work_details.value|default:'' }}</textarea>
+            {% if form.work_details.errors %}
+                <div class="alert alert-danger mt-1">{{ form.work_details.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.work_experience_from.id_for_label }}">Work Experience From:</label>
+            <input type="date"
+                   id="{{ form.work_experience_from.id_for_label }}"
+                   name="{{ form.work_experience_from.name }}"
+                   class="form-control"
+                   value="{{ form.work_experience_from.value|default:'' }}">
+            {% if form.work_experience_from.errors %}
+                <div class="alert alert-danger mt-1">{{ form.work_experience_from.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.work_experience_to.id_for_label }}">Work Experience To:</label>
+            <input type="date"
+                   id="{{ form.work_experience_to.id_for_label }}"
+                   name="{{ form.work_experience_to.name }}"
+                   class="form-control"
+                   value="{{ form.work_experience_to.value|default:'' }}">
+            {% if form.work_experience_to.errors %}
+                <div class="alert alert-danger mt-1">{{ form.work_experience_to.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.reference_1_name.id_for_label }}">Reference 1 Name:</label>
+            <input type="text"
+                   id="{{ form.reference_1_name.id_for_label }}"
+                   name="{{ form.reference_1_name.name }}"
+                   class="form-control"
+                   value="{{ form.reference_1_name.value|default:'' }}">
+            {% if form.reference_1_name.errors %}
+                <div class="alert alert-danger mt-1">{{ form.reference_1_name.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.reference_1_email.id_for_label }}">Reference 1 Email:</label>
+            <input type="email"
+                   id="{{ form.reference_1_email.id_for_label }}"
+                   name="{{ form.reference_1_email.name }}"
+                   class="form-control"
+                   value="{{ form.reference_1_email.value|default:'' }}">
+            {% if form.reference_1_email.errors %}
+                <div class="alert alert-danger mt-1">{{ form.reference_1_email.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.reference_1_phone_number.id_for_label }}">Reference 1 Phone Number:</label>
+            <input type="tel"
+                   id="{{ form.reference_1_phone_number.id_for_label }}"
+                   name="{{ form.reference_1_phone_number.name }}"
+                   class="form-control"
+                   value="{{ form.reference_1_phone_number.value|default:'' }}">
+            {% if form.reference_1_phone_number.errors %}
+                <div class="alert alert-danger mt-1">{{ form.reference_1_phone_number.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.reference_2_name.id_for_label }}">Reference 2 Name:</label>
+            <input type="text"
+                   id="{{ form.reference_2_name.id_for_label }}"
+                   name="{{ form.reference_2_name.name }}"
+                   class="form-control"
+                   value="{{ form.reference_2_name.value|default:'' }}">
+            {% if form.reference_2_name.errors %}
+                <div class="alert alert-danger mt-1">{{ form.reference_2_name.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.reference_2_email.id_for_label }}">Reference 2 Email:</label>
+            <input type="email"
+                   id="{{ form.reference_2_email.id_for_label }}"
+                   name="{{ form.reference_2_email.name }}"
+                   class="form-control"
+                   value="{{ form.reference_2_email.value|default:'' }}">
+            {% if form.reference_2_email.errors %}
+                <div class="alert alert-danger mt-1">{{ form.reference_2_email.errors|join:", " }}</div>
+            {% endif %}
+
+            <label for="{{ form.reference_2_phone_number.id_for_label }}">Reference 2 Phone Number:</label>
+            <input type="tel"
+                   id="{{ form.reference_2_phone_number.id_for_label }}"
+                   name="{{ form.reference_2_phone_number.name }}"
+                   class="form-control"
+                   value="{{ form.reference_2_phone_number.value|default:'' }}">
+            {% if form.reference_2_phone_number.errors %}
+                <div class="alert alert-danger mt-1">{{ form.reference_2_phone_number.errors|join:", " }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <div class="form-actions mt-4">
+        <button type="submit" class="btn btn-primary">Next</button>
+
+        {% if step|add:"-1" > 0 %}
+            <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

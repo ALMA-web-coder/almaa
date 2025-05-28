@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/information/about_us.css' %}">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Transforming Leadership and Governance Seminars (BTLGS)</title>
+
+    <style>
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Change the background of the arrow icons to black */
+        }
+    
+        .carousel-control-prev,
+        .carousel-control-next {
+            filter: invert(1); /* Invert the icon colors to white */
+        }
+    </style>
+</head>
+<body>
+
+   <!-- ***** Header Area Start ***** -->
+   <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:rgba(255, 255, 255, 0.8);">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{%url 'almaweb:home'%}">
+            <img src="{% static 'images/alma.png' %}" class="img" alt="ALMA Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link color-link" href="{% url 'almaweb:home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link color-link" href="{% url 'almaweb:journals' %}">Journal Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-link" href="{% url 'almaweb:consulting' %}">Consultancy Unit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-link" href="{% url 'almaweb:payments' %}">Payments</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active-link" href="{% url 'almaweb:about' %}">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- ***** Header Area End ***** -->
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+    
+      <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-8">
+          <h2>Transforming Leadership and Governance Seminars (BTLGS)</h2>
+    
+          <p><i class="fas fa-tags"></i> Category:</p>
+          <h5>Short Seminar</h5>
+          <hr>
+          <p><i class="fas fa-star"></i> (0 reviews)</p>
+      <img src="{% static 'images/btlgs-b.jpg' %}" alt="" style="width:100%">
+        
+      </div>
+
+      <div class="col-md-4">
+        <div class="card" style="height:100%;">
+          <h5 class="card-title bg-dark text-light text-center pt-2" style="height:10%;">Take this course</h5>
+          <div class="card-body">
+            <h5 class="price">Price:
+              <br>
+              <h3><i class="fas fa-dollar-sign"></i> 200</h3>
+          </h5>
+          <hr>
+          <p><i class="fas fa-clock"></i> Duration:</p>
+          <p>6 Month Part Time Programme</p>
+          <hr>
+          <p><i class="fas fa-th"></i> Module:</p>
+          <p>6</p>
+          <hr>
+          <p><i class="fas fa-language"></i> Language:</p>
+          <p>English</p>
+          <hr>
+          <p><i class="fas fa-map-marker-alt"></i> Location:</p>
+          <p>33 Marlborough Drive, Harare</p>
+          <hr>
+          <p><i class="fas fa-check-circle"></i> Prerequisites:</p>
+          <p>No</p>
+          <hr>
+          <p><i class="fas fa-certificate"></i> Certificate:</p>
+          <p>Yes</p>
+          <hr>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container mt-4">
+        
+        <p>Africa Leadership and Management Academy (ALMA) is linked to the International Leadership University (ILU), a group of universities seeking to spearhead holistic transformation in Africa through biblically based leadership studies. The training partner of ILU is the International Leadership Foundation (ILF), which runs transformational leadership short courses designed to multiply the transformational agenda since not all can or will attend ALMA or ILU.</p>
+
+        <h4>Course Details</h4>
+        <ul>
+            <li><strong>Take this course</strong></li>
+            <li><strong>Price:</strong> $150</li>
+            <li><strong>Duration:</strong> 6 Month Part Time Programme</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>Location:</strong> 33 Marlborough Drive, Harare</li>
+            <li><strong>Prerequisites:</strong> No</li>
+            <li><strong>Start Course:</strong> 03/14/2022</li>
+            <li><strong>Certificate:</strong> Yes</li>
+        </ul>
+    </div>
+<!-- Footer Structure -->
+
+<footer class="container-fluid bg-dark text-light text-center pt-4 pb-4">
+ 
+  <div class="row">
+   <div class="col-12">
+   <h4>
+     <img src="{% static 'images/alma.png' %}" alt="Logo" style="width:15%">
+     Africa Leadership and Management Academy (ALMA)</h4>
+   <p>ALMA is a leadership school that aims at transforming Africa’s future.</p>
+   </div>
+   <div class="col-md-6">
+   <h5>Popular Courses</h5>
+   <ul class="list-unstyled">
+       <li><i class="fas fa-book"></i> Transforming Leadership and Governance Seminars (BTLGS) - $150</li>
+       <li><i class="fas fa-book"></i> ILF’s Philosophy of Transforming Leadership - $150</li>
+       <li><i class="fas fa-book"></i> MSc in Governance & Leadership Degree (MGOVL) - $750</li>
+   </ul>
+
+ </div>
+
+   <div class="col-md-6">
+   <h5>Contact Us</h5>
+   <p>We would love to hear from you. Contact us from 9am-4.30pm, every Monday to Friday.</p>
+   <p>
+       <i class="fas fa-map-marker-alt"></i> Address: 33 Marlborough Dr, Marlborough, Harare, Zimbabwe<br>
+       <i class="fas fa-phone-alt"></i> Call: +08677 174235<br>
+       <i class="fas fa-envelope"></i> Email: 
+       <a href="mailto:programme@alma.ac.zw" class="text-light">programme@alma.ac.zw</a>
+   </p>
+
+ </div>
+ <div class="col-12">
+   <p class="mt-4">&copy; 2023 ALMA. All Rights Reserved.</p>
+ </div>
+
+</div>
+</footer>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

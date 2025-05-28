@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+<div class="container">
+    <h1>Application Fee Payment</h1>
+    
+    <p>
+        You are about to pay the application fee for your application. The amount due is 
+        <strong>$20.00</strong>.
+    </p>
+
+    <form method="POST" action="{% url 'application_view' %}?step=9">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="payment_method">Select Payment Method:</label>
+            <select id="payment_method" name="payment_method" required>
+                <option value="" disabled selected>Select a payment method</option>
+                <option value="mobile">Mobile Payment (e.g., Ecocash)</option>
+                <option value="card">Card Payment</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+    </form>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<script>
+    // Show or hide mobile number field based on selected payment method
+    document.getElementById('payment_method').addEventListener('change', function () {
+        var mobileFields = document.getElementById('mobile_fields');
+        if (this.value === 'mobile') {
+            mobileFields.style.display = 'block';
+        } else {
+            mobileFields.style.display = 'none';
+        }
+    });
+</script>
+
+    
+  
+   
+  {%endblock%}

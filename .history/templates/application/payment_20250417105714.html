@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+
+
+<div class="container">
+    <h1>Payment for Application Fee</h1>
+    
+    <h2>Total Amount: $20</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'application_view' %}?step=9">
+        {% csrf_token %}
+        <div class="payment-methods">
+            <h3>Select Payment Method:</h3>
+            <label>
+                <input type="radio" name="payment_method" value="mobile" required>
+                Mobile Payment (e.g., EcoCash)
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="payment_method" value="card">
+                Card Payment (Credit/Debit)
+            </label>
+        </div>
+
+
+        <button type="submit" class="btn">Proceed to Payment</button>
+    </form>
+</div>
+
+
+        
+              
+  {%endblock%}

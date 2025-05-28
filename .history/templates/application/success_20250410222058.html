@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+
+    <h1>Application Submitted Successfully!</h1>
+    <p>Thank you for your application. We will contact you shortly.</p>
+
+    
+    <p style="color:white;">If you wish to track your application, please use the email address you provided during submission:</p>
+    <p style="color:white;"><strong>Email: {{ email }}</strong></p>
+
+    
+    <a href="{% url 'homepage' %}">Back to Home</a>
+{%endblock%}

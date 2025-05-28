@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   
+</head>
+<body>
+    <div class="container">
+        <h2>Work Experience</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=7"> 
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            
+            {% for form in formset %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Please address the following errors:</strong>
+                            <ul>
+                                {% for error in form.errors %}
+                                    <li>{{ error|linebreaks }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}7 of 9</p>
+    </footer>
+</body>
+</html>

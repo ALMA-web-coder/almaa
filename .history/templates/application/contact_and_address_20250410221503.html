@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+        <form method="post" action="{% url 'application_view' %}?step=4">
+            {% csrf_token %}
+            {{ form.non_field_errors }}  
+            
+            <div class="form-group">
+                {{ form.as_p }}  
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+ {% endblock%}

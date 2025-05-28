@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/information/about_us.css' %}">
+
+         <!-- Font Awesome CDN -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+         <!--Google fomts-->
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+     
+         <!-- Bootstrap core CSS -->
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     
+         
+
+    <title>Africa Leadership and Management Academy (ALMA)</title>
+    <script>
+        const details = {
+            Background: "The Consultancy Unit is ALMA’s platform for engaging funders to advance leadership transformation in Africa. Our value preposition is to be a trusted partner in providing consultancy services to public and private organizations, and communities both ethically and efficiently consistent with recognized good grant management practices. We bring a mixture of experience, up-to-date skills, expert knowledge, and relevant academic and professional qualifications in all our consultancy service offerings. Our goal is to build collaborative relationships with all our partners to solve existing and emerging leadership and governance challenges.",
+            "Areas of Concentration": "Transformational Leadership, Governance, Capacity Building, Community Engagement",
+            Experts: "Experienced professionals in leadership development, governance, and consultancy.",
+            Partnerships: "Collaborations with NGOs, government entities, and private sector partners.",
+            "How to Get Involved": "Contact us to explore partnership opportunities and consultancy services."
+        };
+
+        function showDetails(header) {
+            // Clear existing content
+            const displayArea = document.getElementById('details');
+            displayArea.innerHTML = '';
+
+            // Display the details for the selected header
+            if (details[header]) {
+                displayArea.innerHTML = `<strong>${header}:</strong> ${details[header]}`;
+            }
+        }
+
+        // Call showDetails with 'Background' when the window loads
+        window.onload = function() {
+            showDetails('Background');
+        }
+    </script>
+    <style>
+        /* Simple styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            cursor: pointer;
+            background-color: #f2f2f2;
+        }
+        #details {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    
+        .img{
+            width:70px;
+        }
+        .active-link {
+            color:rgb(8, 77, 35) !important;
+        }
+
+        .color-link{
+            color: #d9534f !important;
+        }
+    </style>
+</head>
+<body>
+
+        <!-- ***** Header Area Start ***** -->
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:rgba(255, 255, 255, 0.8);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{%url 'almaweb:home'%}">
+                    <img src="{% static 'images/alma.png' %}" class="img" alt="ALMA Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url  'almaweb:home' %}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link color-link" href="{% url 'almaweb:journals' %}">Journal Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active-link" href="{% url 'almaweb:consulting' %}">Consultancy Unit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'almaweb:payments' %}">Payments</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link color-link" href="{% url 'almaweb:about' %}">About Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- ***** Header Area End ***** -->
+   
+    <div class="container-fluid  mt-5 bg-dark text-white">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="consultancy-title">Consultancy Unit</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid mt-3 bg-dark text-white pb-2 mb-3">
+
+
+      
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-sm-12">
+            <img src="{% static 'images/consultancy-unit-image_2.jpg' %}" alt="ALMA Team" class="team-image img-fluid">
+        </div>
+    </div>
+    </div>
+  
+      <div class="about-section">
+          <h3>Welcome to the ALMA Consultancy Unit!</h3>
+          <p class="intro-text">
+              Our work revolves around conceptualizing models of leadership that can inspire industry across culture, gender, and age groups. Faced with a changing climate, a global pandemic, rapidly changing technologies, and a new digital economy, among other drivers of productivity, the demand for transformational leadership has never been greater or more urgent. What approaches to visualizing and articulating African leadership are best suited for meeting the challenges of the 21st Century? We hope these and other questions around effective and supportive leadership resonate with you so that we can engage in meaningful conversations going forward.
+          </p>
+  
+          <hr>
+  
+          <h4 class="table-title">Areas of Focus</h4>
+          
+<table class="table table-bordered text-dark">
+    <thead>
+        <tr>
+            <th onclick="showDetails('Background')">Background</th>
+            <th onclick="showDetails('Areas of Concentration')">Areas of Concentration</th>
+            <th onclick="showDetails('Experts')">Experts</th>
+            <th onclick="showDetails('Partnerships')">Partnerships</th>
+            <th onclick="showDetails('How to Get Involved')">How to Get Involved</th>
+        </tr>
+    </thead>
+</table>
+
+<div id="details"></div>
+
+  
+          <hr>
+  
+          <h4>Our Value Proposition</h4>
+          <p>
+              The Consultancy Unit is ALMA’s platform for engaging funders to advance leadership transformation in Africa. Our value proposition is to be a trusted partner in providing consultancy services to public and private organizations, and communities both ethically and efficiently, consistent with recognized good grant management practices. We bring a mixture of experience, up-to-date skills, expert knowledge, and relevant academic and professional qualifications in all our consultancy service offerings. Our goal is to build collaborative relationships with all our partners to solve existing and emerging leadership and governance challenges.
+          </p>
+      </div>
+  </div>
+  
+
+<!-- Footer Structure -->
+
+<footer class="container-fluid bg-dark text-light text-center pt-4 pb-4">
+ 
+    <div class="row">
+     <div class="col-12">
+     <h4>
+       <img src="{% static 'images/alma.png' %}" alt="Logo" style="width:15%">
+       Africa Leadership and Management Academy (ALMA)</h4>
+     <p>ALMA is a leadership school that aims at transforming Africa’s future.</p>
+     </div>
+     <div class="col-12">
+     <h5>Popular Courses</h5>
+     <ul class="list-unstyled">
+         <li><i class="fas fa-book"></i> Transforming Leadership and Governance Seminars (BTLGS) - $150</li>
+         <li><i class="fas fa-book"></i> ILF’s Philosophy of Transforming Leadership - $150</li>
+         <li><i class="fas fa-book"></i> MSc in Governance & Leadership Degree (MGOVL) - $750</li>
+     </ul>
+
+   </div>
+
+   
+     <div class="col-12">
+     <h5>Contact Us</h5>
+     <p>We would love to hear from you. Contact us from 9am-4.30pm, every Monday to Friday.</p>
+     <p>
+         <i class="fas fa-map-marker-alt"></i> Address: 33 Marlborough Dr, Marlborough, Harare, Zimbabwe<br>
+         <i class="fas fa-phone-alt"></i> Call: +08677 174235<br>
+         <i class="fas fa-envelope"></i> Email: 
+         <a href="mailto:programme@alma.ac.zw" class="text-light">programme@alma.ac.zw</a>
+     </p>
+
+
+   </div>
+   <div class="col-12">
+     <p class="mt-4">&copy; 2023 ALMA. All Rights Reserved.</p>
+   </div>
+
+</div>
+</footer>
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

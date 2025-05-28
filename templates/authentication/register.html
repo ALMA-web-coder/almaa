@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <!-- Messages Section -->
+    {% if messages %}
+    <div class="alert alert-info">
+        <ul class="messages mb-0">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Registration Form -->
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center mb-0">Register</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="row">
+                    <!-- First Name -->
+                    <div class="col-md-6 mb-3 text-center">
+                        <label for="id_first_name" class="form-label">First Name</label>
+                        {{ form.first_name }}
+                        <div class="invalid-feedback">
+                            Please enter your first name.
+                        </div>
+                    </div>
+                    <!-- Last Name -->
+                    <div class="col-md-6 mb-3 text-center">
+                        <label for="id_last_name" class="form-label">Last Name</label>
+                        {{ form.last_name }}
+                        <div class="invalid-feedback">
+                            Please enter your last name.
+                        </div>
+                    </div>
+                    <!-- Username -->
+                    <div class="col-md-6 mb-3 text-center">
+                        <label for="id_username" class="form-label">Username</label>
+                        {{ form.username }}
+                        <div class="invalid-feedback">
+                            Please enter a username.
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="col-md-6 mb-3 text-center">
+                        <label for="id_email" class="form-label">Email</label>
+                        {{ form.email }}
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+                    <!-- Password 1 -->
+                    <div class="col-md-12 mb-3 text-center">
+                        <label for="id_password1" class="form-label">Password</label>
+                        {{ form.password1 }}
+                        <small class="form-text text-muted">
+                            Password should be at least 8 characters long and include a mix of letters, numbers, and special characters. Password shall not be similar to any information entered above!
+                        </small>
+                        <div class="invalid-feedback">
+                            Please enter a valid password.
+                        </div>
+                    </div>
+                    <!-- Password 2 -->
+                    <div class="col-md-12 mb-3 text-center">
+                        <label for="id_password2" class="form-label">Confirm Password</label>
+                        {{ form.password2 }}
+                        <div class="invalid-feedback">
+                            Passwords do not match.
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <p class="mb-0">Already have an account? <a href="{% url 'login' %}">Login Here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

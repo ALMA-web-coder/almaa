@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+
+           
+        <form method="POST" action="{% url 'application_view' %}?step=9">  
+                {% csrf_token %}
+                <h3>Payment Information</h3>
+                <p>Amount: ${{ amount }}</p>
+                <button type="submit">Proceed to PayNow</button>
+            </form>
+  {%endblock%}

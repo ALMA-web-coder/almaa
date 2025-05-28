@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+        <h2>Personal Information</h2>
+        <form method="post" action="{% url 'application_view' %}?step=2">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                {% for field in form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }} 
+                    {% if field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ field.label }}:</strong> {{ field.errors|join:", " }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock%}

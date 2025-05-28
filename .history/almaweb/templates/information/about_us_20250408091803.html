@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/information/about_us.css' %}">
+
+         <!-- Font Awesome CDN -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+         <!--Google fomts-->
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+     
+         <!-- Bootstrap core CSS -->
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     
+         
+
+    <title>Africa Leadership and Management Academy (ALMA)</title>
+
+    <style>
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Change the background of the arrow icons to black */
+        }
+    
+        .carousel-control-prev,
+        .carousel-control-next {
+            filter: invert(1); /* Invert the icon colors to white */
+        }
+
+        .nav-link:hover {
+            color: #d9534f; 
+        }
+
+        .active-link {
+            color:rgb(8, 77, 35) !important;
+        }
+
+        .color-link{
+            color: #d9534f !important;
+        }
+    </style>
+</head>
+<body>
+
+        <!-- ***** Header Area Start ***** -->
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:rgba(255, 255, 255, 0.8);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{%url 'home'%}">
+                    <img src="{% static 'images/alma.png' %}" class="img" alt="ALMA Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'almaweb:home' %}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link color-link" href="{% url 'journals' %}">Journal Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'consulting' %}">Consultancy Unit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'payments' %}">Payments</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link active-link" href="{% url 'about' %}">About Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- ***** Header Area End ***** -->
+<div class="container-fluid">
+<div class="row">
+  <div class="col bg-dark text-light mt-3 mb-4" style="height:20vh;">
+    <h1 class="about-us-title" style="padding-top:40px;">About Us</h1>
+  </div>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-10 col-sm-12">
+          <img src="{% static 'images/about_us.jpg' %}" alt="ALMA Team" class="team-image img-fluid">
+      </div>
+  </div>
+</div>
+
+  
+
+    <div class="container mt-5">
+   
+      <div class="about-us-section">
+          <h3>History of ALMA</h3>
+          <p class="history-content">
+              Africa Leadership and Management Academy (ALMA) is a leadership school that was born out of a crying need for leaders of integrity to spearhead Africa’s transformation from spiritual, social and moral bankruptcy as well as economic oppression. The idea of starting ALMA was the outcome of a meeting held in December 1994, at the Pan African Christian Leadership Assembly (PACLA II) in Kenya, hosted by the Association of Evangelicals in Africa (AEA). Delegates included Evangelical Christian leaders from all over the continent.
+          </p>
+          <p>
+              At this meeting it was noted that though Christianity has grown in unprecedented numbers on the continent the quality of Christianity is questionable because instead of society improving as a result, it was actually decaying. Even as they met, news of the genocide occurring in Rwanda at that time filtered to them. Rwanda had been the center of the East African revival and was reputed to be ninety percent Christian at the time of the genocide. The moral decay on the continent, the enigma of poverty in a sea of abundant resources, and the general decay in all facets of society was a cause of concern.
+          </p>
+          <p>
+              The meeting observed that the economies and social structures of Europe and the Western world were built on strong Christian ethics and values rooted in the influence of Christian leaders and academics like John Calvin and John Wesley, which is largely why they are successful today. The meeting identified the African problem as one of inept leadership and wastage of God-given resources. One of their resolutions was that they should deliberately create leadership training institutions to equip African leaders to make the most of what God has so abundantly blessed us with.
+          </p>
+          <p>
+              As an outcome of that meeting, Dr. Delanyo Adadevoh, a Ghanaian who was at that time based in Zimbabwe and who now serves as one of the Vice-Presidents of Campus Crusade for Christ International worked with other African leaders to establish ALMA. In 1999, Dr. Rodney Orr, Dr. Mike Wicker, and Mr. Ken Stravens moved with their families to Zimbabwe to establish ALMA. The school has grown over the years and now has over one hundred Masters graduates.
+          </p>
+          <p>
+              The original pioneer missionaries have now left; Dr. Orr left in June 2009, handing over to Dr. Dwight Mutonono who together with the Executive leadership team led the institution up to June 2018. Dr Moses Chundu then took over the Executive Director position to date.
+          </p>
+          
+          <hr>
+  
+          <h4>Our Achievements</h4>
+          <ul>
+              <li><strong>8</strong> Student Graduate Countries</li>
+              <li><strong>298</strong> Passed Graduates</li>
+              <li><strong>18</strong> Qualified Staff</li>
+              <li><strong>5</strong> Strategic Partnerships</li>
+          </ul>
+          <br>
+          <br>
+          <hr>
+          <br>
+          <br>
+  
+          <h3>Vision and Mission</h3>
+          <br>
+          <hr>
+          <br>
+          <div class="mb-3">
+              <h5>Vision</h5>
+
+              <button class="btn btn-link" data-toggle="collapse" data-target="#visionMore">View More</button>
+              <div id="visionMore" class="collapse">
+                <p>Premier holistic transformative leadership development Academy in Africa and beyond.</p>
+              </div>
+          </div>
+  
+          <div class="mb-3">
+              <h5>Mission</h5>
+              
+              <button class="btn btn-link" data-toggle="collapse" data-target="#missionMore">View More</button>
+              <div id="missionMore" class="collapse">
+                <p>Building leaders of integrity who will impact Africa and the world for Christ.</p>
+              </div>
+          </div>
+
+          <div class="mb-3">
+            <h5>Core Values</h5>
+         
+            <button class="btn btn-link" data-toggle="collapse" data-target="#valuesMore">View More</button>
+            <div id="valuesMore" class="collapse">
+                <p>Integrity, Excellence, Collaboration, and Stewardship.</p>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h5>ALMA's Distinctives</h5>
+           
+            <button class="btn btn-link" data-toggle="collapse" data-target="#almaMore">View More</button>
+            <div id="almaMore" class="collapse">
+                <p>Premier holistic transformative leadership development Academy in Africa and beyond.</p>
+        </div>
+
+        <div class="mb-3">
+            <h5>ALMA Mandates</h5>
+          
+            <button class="btn btn-link" data-toggle="collapse" data-target="#mandatesMore">View More</button>
+            <div id="mandatesMore" class="collapse">
+                <p>(1) Offer courses undergraduate, graduate and post graduate courses in Leadership studies, (2) Multiply leaders of integrity, (3) Conduct leadership seminars and workshops, (4) Facilitate and conduct research works, and (5) Share ideas throughout the continent through research and publishing on leadership studies.</p>
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <h5>Market Niche/ Clients for ALMA</h5>
+         
+          <button class="btn btn-link" data-toggle="collapse" data-target="#marketMore">View More</button>
+          <div id="marketMore" class="collapse">
+            <p>(1) Family, (2) Business, (3) Government, (4) Religion, (5) Education, (6) Media, and (7) Celebration (Arts, culture and sports).</p>
+          </div>
+      </div>
+  
+
+      <div class="mb-3">
+        <h5>Stakeholders for ALMA</h5>
+       
+        <button class="btn btn-link" data-toggle="collapse" data-target="#stakeMore">View More</button>
+        <div id="stakeMore" class="collapse">
+            <p>Campus Crusade for Christ, NUST, ZimCHE, Government among others.</p>
+        </div>
+    </div>
+          <hr>
+          <br>
+  
+          <h4>Our Staff</h4>
+          <p>Learn about our staff:</p>
+          <ul>
+              <li>Moses Chundu - Executive Director</li>
+              <li>Dr Pindai Sithole - Programmes Director</li>
+              <li>Tapfumaneyi Chichetu - BVSc; M.A. in Leadership and Management</li>
+              <li>Racheal Magombedze - Accounts Manager</li>
+              <li>Sindiso Silamba - Registrar</li>
+              <li>Lilian Kokera - Librarian</li>
+          </ul>
+          
+
+      </div>
+      
+  </div>
+  
+
+   
+
+
+<!-- Footer Structure -->
+
+<footer class="container-fluid bg-dark text-light text-center pt-4 pb-4">
+ 
+    <div class="row">
+     <div class="col-12">
+     <h4>
+       <img src="{% static 'images/alma.png' %}" alt="Logo" style="width:15%">
+       Africa Leadership and Management Academy (ALMA)</h4>
+     <p>ALMA is a leadership school that aims at transforming Africa’s future.</p>
+     </div>
+     <div class="col-md-6">
+     <h5>Popular Courses</h5>
+     <ul class="list-unstyled">
+         <li><i class="fas fa-book"></i> Transforming Leadership and Governance Seminars (BTLGS) - $150</li>
+         <li><i class="fas fa-book"></i> ILF’s Philosophy of Transforming Leadership - $150</li>
+         <li><i class="fas fa-book"></i> MSc in Governance & Leadership Degree (MGOVL) - $750</li>
+     </ul>
+
+   </div>
+
+     <div class="col-md-6">
+     <h5>Contact Us</h5>
+     <p>We would love to hear from you. Contact us from 9am-4.30pm, every Monday to Friday.</p>
+     <p>
+         <i class="fas fa-map-marker-alt"></i> Address: 33 Marlborough Dr, Marlborough, Harare, Zimbabwe<br>
+         <i class="fas fa-phone-alt"></i> Call: +08677 174235<br>
+         <i class="fas fa-envelope"></i> Email: 
+         <a href="mailto:programme@alma.ac.zw" class="text-light">programme@alma.ac.zw</a>
+     </p>
+
+   </div>
+   <div class="col-12">
+     <p class="mt-4">&copy; 2023 ALMA. All Rights Reserved.</p>
+   </div>
+
+</div>
+</footer>
+
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

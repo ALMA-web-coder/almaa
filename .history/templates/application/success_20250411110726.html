@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">Application Submitted Successfully!</h1>
+    <p>Thank you for your application. We will contact you shortly.</p>
+
+    <p>If you wish to track your application, please use the email address you provided during submission:</p>
+    <p><strong>Email: {{ email }}</strong></p>
+
+    <a href="{% url 'homepage' %}" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}

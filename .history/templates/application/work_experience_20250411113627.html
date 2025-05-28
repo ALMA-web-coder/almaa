@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgba(128, 0, 32, 0.1);
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 1);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgb(255, 255, 255);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgb(128,0,32);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: rgb(128,0,32);
+        }
+
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            height: 40px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            color: rgb(128,0,32);
+            background-color:rgba(128,0,32,0.2); 
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        select:focus {
+            background-color: rgba(128, 0,32, 0.5); 
+            border-color:white; 
+            outline: none; 
+        }
+
+        .custom-textarea {
+            width: 100%;
+            padding: 12px; 
+            font-size: 16px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+            background-color:  rgba(128,0,32,0.2); 
+            color: #ffffff; 
+        }
+
+        .custom-textarea:focus {
+            border-color: white;
+            outline: none; 
+            box-shadow: 0 0 5px white;
+            background-color: #444; 
+        }
+
+        .form-group input {
+            width: 100%; 
+            padding: 0.75rem; 
+            border: 1px solid rgba(211,211,211,1); 
+            border-radius: 5px;
+            font-size: 1rem; 
+            background-color:  rgba(128,0,32,0.2); 
+            color: #ffffff; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .custom-input {
+            width: 100%; 
+            padding: 10px; 
+            font-size: 16px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color:  rgba(211,211,211,1); 
+            color: #ffffff;
+        }
+
+        .custom-input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            background-color: #444; 
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .form-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-right: 240px;
+            padding: 10px 15px;
+            background-color:rgb(123, 28, 28);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px; 
+        }
+
+        .btn:hover {
+            background-color:rgb(164, 46, 46);
+        }
+
+        .btn-secondary {
+            background-color: #5bc0de;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #31b0d5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color:rgb(255, 255, 255);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Work Experience</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=7"> 
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            
+            {% for form in formset %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Please address the following errors:</strong>
+                            <ul>
+                                {% for error in form.errors %}
+                                    <li>{{ error|linebreaks }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}7 of 9</p>
+    </footer>
+</body>
+</html>

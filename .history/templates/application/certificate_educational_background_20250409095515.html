@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Background</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color:rgb(255, 255, 255); 
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color:rgb(129, 20, 20);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color:rgba(163, 24, 24, 0.74);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            height: 40px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid blue;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        select:focus {
+            background-color: #444; 
+            border-color: #66afe9; 
+            outline: none; 
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #a94442; 
+            background-color: #f2dede; 
+            border-color: #ebccd1; 
+        }
+
+        .form-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color:rgb(11, 60, 11);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px; 
+        }
+
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+
+        .btn-secondary {
+            background-color: #5bc0de;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #31b0d5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Educational Background & Program Applied For:</h2>
+        
+        <form method="post" action="{% url 'authentication:application_view' %}?step=5">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                {{ form.as_p }}  
+            </div>
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+                
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}5  of 9</p>  
+    </footer>
+</body>
+</html>

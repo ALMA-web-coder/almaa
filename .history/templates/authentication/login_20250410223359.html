@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if messages %}
+    <div class="alert alert-warning">
+        <ul class="list-unstyled">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }} <!-- Label for the input -->
+                {{ field:"form-control" }} <!-- Input field -->
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {{ field.errors }} <!-- Display any errors -->
+            </div>
+        {% endfor %}
+        
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+    <p>To register an account <a href="{% url 'register' %}">Click here</a></p>
+    <p>Forgot Password?: <a href="{% url 'password_reset' %}">Reset Password</a></p>
+</div>
+{% endblock %}

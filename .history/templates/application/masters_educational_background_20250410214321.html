@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Background</title>
+
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo NUST" class="logo">
+            <img src="{% static 'images/alma.png' %}" alt="Logo ALMA" class="logos">
+        </div>
+
+        <h2>Educational Background</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=5">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                {{ form.as_p }}  
+            </div>
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}5 of 9</p>  
+    </footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+    <h1>Complete Your Payment</h1>
+
+    <div class="par">
+       <p>You are about to pay an application fee of $20.</p>
+       <p>Your payment will be processed by Paynow.</p>
+    </div>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}{% endif %}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+  
+    <form method="POST" action="{% url 'application_view' %}?step=9">
+        {% csrf_token %}
+        
+        <fieldset>
+            <legend>Select Payment Method:</legend>
+           
+            <br>
+            <label>
+                <input type="radio" name="payment_method" value="card" required>
+                Pay with Paynow
+            </label>
+        </fieldset>
+        <div class="box-btn">
+        <div class="button">
+            <button type="submit">Proceed to Payment</button>
+        </div>
+        </div>
+    </form>
+  {%endblock%}
+

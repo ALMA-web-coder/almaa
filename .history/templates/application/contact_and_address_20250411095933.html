@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Contact and Address Information</h2>
+    <form method="post" action="{% url 'application_view' %}?step=4">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group mb-3">
+            <label for="{{ form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+            {{ form.phone_number }}
+            {% if form.phone_number.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Phone Number:</strong> {{ form.phone_number.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Email:</strong> {{ form.email.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.permanent_address_no_street.id_for_label }}" class="form-label">Permanent Address (No. & Street)</label>
+            {{ form.permanent_address_no_street }}
+            {% if form.permanent_address_no_street.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Address:</strong> {{ form.permanent_address_no_street.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.permanent_address_apt_unit.id_for_label }}" class="form-label">Apt/Unit</label>
+            {{ form.permanent_address_apt_unit }}
+            {% if form.permanent_address_apt_unit.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Apt/Unit:</strong> {{ form.permanent_address_apt_unit.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.permanent_address_state_province.id_for_label }}" class="form-label">State/Province</label>
+            {{ form.permanent_address_state_province }}
+            {% if form.permanent_address_state_province.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>State/Province:</strong> {{ form.permanent_address_state_province.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.home_phone.id_for_label }}" class="form-label">Home Phone</label>
+            {{ form.home_phone }}
+            {% if form.home_phone.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Home Phone:</strong> {{ form.home_phone.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.office_phone.id_for_label }}" class="form-label">Office Phone</label>
+            {{ form.office_phone }}
+            {% if form.office_phone.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Office Phone:</strong> {{ form.office_phone.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Next</button>
+            {% if step|add:"-1" > 0 %}
+                <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

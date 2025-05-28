@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="mt-4">Work Experience</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=7"> 
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Experience {{ forloop.counter }}</h5>
+
+                        <div class="form-group">
+                            <label for="{{ form.employer.id_for_label }}">Employer:</label>
+                            {{ form.employer|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.employer.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.employer.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.work_details.id_for_label }}">Work Details:</label>
+                            {{ form.work_details|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.work_details.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.work_details.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.work_experience_from.id_for_label }}">Work Experience From:</label>
+                            {{ form.work_experience_from|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.work_experience_from.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.work_experience_from.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.work_experience_to.id_for_label }}">Work Experience To:</label>
+                            {{ form.work_experience_to|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.work_experience_to.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.work_experience_to.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <h6>References</h6>
+
+                        <div class="form-group">
+                            <label for="{{ form.reference_1_name.id_for_label }}">Reference 1 Name:</label>
+                            {{ form.reference_1_name|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.reference_1_name.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.reference_1_name.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.reference_1_email.id_for_label }}">Reference 1 Email:</label>
+                            {{ form.reference_1_email|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.reference_1_email.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.reference_1_email.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.reference_1_phone_number.id_for_label }}">Reference 1 Phone Number:</label>
+                            {{ form.reference_1_phone_number|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.reference_1_phone_number.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.reference_1_phone_number.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.reference_2_name.id_for_label }}">Reference 2 Name:</label>
+                            {{ form.reference_2_name|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.reference_2_name.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.reference_2_name.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.reference_2_email.id_for_label }}">Reference 2 Email:</label>
+                            {{ form.reference_2_email|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.reference_2_email.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.reference_2_email.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.reference_2_phone_number.id_for_label }}">Reference 2 Phone Number:</label>
+                            {{ form.reference_2_phone_number|as_widget(attrs={'class': 'form-control'}) }}
+                            {% if form.reference_2_phone_number.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.reference_2_phone_number.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Next</button>
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2 class="mb-4">Additional Information</h2>
+
+<form method="post" action="{% url 'application_view' %}?step=8"> 
+    {% csrf_token %}
+    
+    <div class="form-group mb-4">
+        <label for="{{ form.how_did_you_hear_about_ALMA.id_for_label }}">How did you hear about ALMA?</label>
+        {{ form.how_did_you_hear_about_ALMA }}
+        {% if form.how_did_you_hear_about_ALMA.errors %}
+            <div class="alert alert-danger mt-1">{{ form.how_did_you_hear_about_ALMA.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="{{ form.additional_remarks.id_for_label }}">Additional Remarks:</label>
+        {{ form.additional_remarks }}
+        {% if form.additional_remarks.errors %}
+            <div class="alert alert-danger mt-1">{{ form.additional_remarks.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+
+    <div class="form-actions mt-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        {% if step|add:"-1" > 0 %}
+            <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Personal Information</h2>
+    <form method="post" action="{% url 'application_view' %}?step=2">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            {{ form.first_name }}
+            {% if form.first_name.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>First Name:</strong> {{ form.first_name.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Last Name:</strong> {{ form.last_name.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="date_of_birth" class="form-label">Date of Birth</label>
+            {{ form.date_of_birth }}
+            {% if form.date_of_birth.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Date of Birth:</strong> {{ form.date_of_birth.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            {{ form.gender }}
+            {% if form.gender.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Gender:</strong> {{ form.gender.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="national_id" class="form-label">National ID</label>
+            {{ form.national_id }}
+            {% if form.national_id.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>National ID:</strong> {{ form.national_id.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="title" class="form-label">Title</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Title:</strong> {{ form.title.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="marital_status" class="form-label">Marital Status</label>
+            {{ form.marital_status }}
+            {% if form.marital_status.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Marital Status:</strong> {{ form.marital_status.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="place_of_birth" class="form-label">Place of Birth</label>
+            {{ form.place_of_birth }}
+            {% if form.place_of_birth.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Place of Birth:</strong> {{ form.place_of_birth.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="citizenship" class="form-label">Citizenship</label>
+            {{ form.citizenship }}
+            {% if form.citizenship.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Citizenship:</strong> {{ form.citizenship.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="country" class="form-label">Country</label>
+            {{ form.country }}
+            {% if form.country.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Country:</strong> {{ form.country.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3 form-check">
+            {{ form.disability }}
+            <label for="disability" class="form-check-label">Disability</label>
+            {% if form.disability.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Disability:</strong> {{ form.disability.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="disability_details" class="form-label">Details about Disability</label>
+            {{ form.disability_details }}
+            {% if form.disability_details.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Details:</strong> {{ form.disability_details.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
+            {% if step|add:"-1" > 0 %}
+                <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+
+
+<div class="container">
+    <h1>Payment for Application Fee</h1>
+    
+    <h2>Total Amount: $20</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'application_view' %}?step=9">
+        {% csrf_token %}
+        <div class="payment-methods">
+            <h3>Select Payment Method:</h3>
+            <label>
+                <input type="radio" name="payment_method" value="mobile" required>
+                Mobile Payment (e.g., EcoCash)
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="payment_method" value="card">
+                Card Payment (Credit/Debit)
+            </label>
+        </div>
+
+        <div class="mobile-payment-info" id="mobile-info" style="display:none;">
+            <h3>Mobile Payment Details</h3>
+            <label for="mobile_number">Mobile Number:</label>
+            <input type="text" name="mobile_number" placeholder="Enter your mobile number" required>
+        </div>
+
+        <div class="card-payment-info" id="card-info" style="display:none;">
+            <h3>Card Payment Details</h3>
+            <label for="card_number">Card Number:</label>
+            <input type="text" name="card_number" placeholder="Enter your card number" required>
+            <br>
+            <label for="expiry_date">Expiry Date:</label>
+            <input type="text" name="expiry_date" placeholder="MM/YY" required>
+            <br>
+            <label for="cvv">CVV:</label>
+            <input type="text" name="cvv" placeholder="Enter CVV" required>
+        </div>
+
+        <button type="submit" class="btn">Proceed to Payment</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileRadio = document.querySelector('input[name="payment_method"][value="mobile"]');
+        const cardRadio = document.querySelector('input[name="payment_method"][value="card"]');
+        const mobileInfo = document.getElementById('mobile-info');
+        const cardInfo = document.getElementById('card-info');
+
+        mobileRadio.addEventListener('change', function() {
+            mobileInfo.style.display = 'block';
+            cardInfo.style.display = 'none';
+        });
+
+        cardRadio.addEventListener('change', function() {
+            cardInfo.style.display = 'block';
+            mobileInfo.style.display = 'none';
+        });
+    });
+</script>
+        
+              
+  {%endblock%}

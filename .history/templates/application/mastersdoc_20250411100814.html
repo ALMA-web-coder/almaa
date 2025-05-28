@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="logo-container text-center mb-4">
+        <img src="{% static 'images/logo.png' %}" style="width:13%;" alt="Logo NUST" class="logo">
+        <img src="{% static 'images/alma.png' %}" style="width:13%;" alt="Logo ALMA" class="logos">
+    </div>
+
+    <h2 class="mb-4">Upload Educational Documents</h2>
+    
+    <form method="post" enctype="multipart/form-data" action="{% url 'application_view' %}?step=6">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        
+        <div class="form-group mb-3">
+            <label for="{{ form.transcript.id_for_label }}" class="form-label">Transcript</label>
+            {{ form.transcript }}
+            {% if form.transcript.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Transcript:</strong> {{ form.transcript.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.degree_certificate.id_for_label }}" class="form-label">Degree Certificate</label>
+            {{ form.degree_certificate }}
+            {% if form.degree_certificate.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Degree Certificate:</strong> {{ form.degree_certificate.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.CV.id_for_label }}" class="form-label">CV</label>
+            {{ form.CV }}
+            {% if form.CV.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>CV:</strong> {{ form.CV.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.a_level_certificate.id_for_label }}" class="form-label">A-Level Certificate</label>
+            {{ form.a_level_certificate }}
+            {% if form.a_level_certificate.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>A-Level Certificate:</strong> {{ form.a_level_certificate.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.o_level_certificate.id_for_label }}" class="form-label">O-Level Certificate</label>
+            {{ form.o_level_certificate }}
+            {% if form.o_level_certificate.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>O-Level Certificate:</strong> {{ form.o_level_certificate.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Upload Documents</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">Application Submitted Successfully!</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success mb-4">
+                        <h4 class="alert-heading">Thank you for your application!</h4>
+                        <p>Your application has been successfully submitted. We will review your application and get back to you soon.</p>
+                        <hr>
+                        <p class="mb-0">Please save your application reference number: <strong>ALMA-{{ application.id }}</strong></p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Application Summary</h4>
+                        
+                        <div class="mb-3">
+                            <h5>Personal Information</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Full Name</th>
+                                            <td>{{ application.title }} {{ application.first_name }} {{ application.last_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date of Birth</th>
+                                            <td>{{ application.date_of_birth }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <td>{{ application.gender }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>National ID</th>
+                                            <td>{{ application.national_id }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5>Contact Information</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{{ contact.email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <td>{{ contact.phone_number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>
+                                                {{ contact.permanent_address_no_street }}
+                                                {% if contact.permanent_address_apt_unit %}
+                                                    , {{ contact.permanent_address_apt_unit }}
+                                                {% endif %}
+                                                , {{ contact.permanent_address_state_province }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5>Educational Background</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Programme Applied For</th>
+                                            <td>{{ educational.get_programme_applied_for_display }}</td>
+                                        </tr>
+                                        {% if application.application_type == 'masters' %}
+                                            <tr>
+                                                <th>Awarding Institution</th>
+                                                <td>{{ educational.awarding_institution }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Major Subjects</th>
+                                                <td>{{ educational.major_subjects }}</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h5>Work Experience</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Employer</th>
+                                            <th>Position</th>
+                                            <th>Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for work in work_experiences %}
+                                            <tr>
+                                                <td>{{ work.employer }}</td>
+                                                <td>{{ work.position }}</td>
+                                                <td>{{ work.duration }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p>You will receive an email confirmation shortly at {{ contact.email }}</p>
+                        <a href="{% url 'homepage' %}" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i>Return to Homepage
+                        </a>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="alert alert-info">
+                            <h5 class="alert-heading">What's Next?</h5>
+                            <p>Our admissions team will review your application and contact you regarding the next steps. You can track your application status using your reference number: <strong>ALMA-{{ application.id }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <small>&copy; {{ current_year }} Africa Leadership and Management Academy. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    {% if messages %}
+    <div class="alert alert-info">
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <h2 class="text-center mb-4">Register</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form.first_name }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.last_name }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.username }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.email }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.password1 }}
+                <small class="form-text text-muted">Password should be at least 8 characters long and include a mix of letters, numbers, and special characters. Password shall not be
+                  similar to any information entered above!
+
+
+              </small>
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.password2 }}
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <div class="col-12 d-flex justify-content-center mb-3">
+    <p class="mt-3">To login: <a href="{% url 'login' %}">Click Here</a></p>
+  </div>
+</div>
+{% endblock %}

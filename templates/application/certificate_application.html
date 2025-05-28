@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form id="masters-application-form" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Step 1: Personal Information -->
+         <div class="row justify-content-center mt-5">
+            <div class="col-6">
+                <div class="form-step" data-step="1">
+                    <h3 class="text-center">Personal Information</h3>
+                       {{ personal_info_form.as_p }}
+                    <button type="button" class="btn btn-primary next-step">Next</button>
+               </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Documents Upload -->
+         <div class="row justify-content-center mt-5 mb-5">
+          <div class="col-6">
+            <div class="form-step" data-step="2" style="display: none;">
+                <h3>Personal Documents</h3>
+                {{ document_upload_form.as_p }}
+                <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                <button type="button" class="btn btn-primary next-step">Next</button>
+            </div>
+    
+          </div>
+         </div>
+        
+        <!-- Step 3: Contact and Address -->
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
+                <div class="form-step" data-step="3" style="display: none;">
+                    <h3>Contact and Address</h3>
+                    {{ contact_and_address_form.as_p }}
+                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                    <button type="button" class="btn btn-primary next-step">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Educational Background -->
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
+                <div class="form-step" data-step="4" style="display: none;">
+                    <h3>Educational Background</h3>
+                    {{ educational_form.as_p }}
+                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                    <button type="button" class="btn btn-primary next-step">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Educational Documents -->
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
+                <div class="form-step" data-step="5" style="display: none;">
+                    <h3>Educational Documents</h3>
+                    {{ documents_upload_form.as_p }}
+                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                    <button type="button" class="btn btn-primary next-step">Next</button>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <!-- Step 6: Other Information -->
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-6">
+                <div class="form-step" data-step="6" style="display: none;">
+                    <h3>Other Information</h3>
+                    {{ other_info_form.as_p }}
+                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                    <button type="submit" class="btn btn-success">Submit Application</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formSteps = document.querySelectorAll('.form-step');
+        let currentStep = 1;
+
+        function showStep(step) {
+            formSteps.forEach(stepElement => {
+                const stepNumber = parseInt(stepElement.dataset.step);
+                if (stepNumber === step) {
+                    stepElement.style.display = 'block';
+                } else {
+                    stepElement.style.display = 'none';
+                }
+            });
+        }
+
+        // Function to validate the current step's required fields
+        function validateCurrentStep() {
+            const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            let isValid = true;
+
+            // Find all required input fields within the current step
+            const requiredInputs = currentStepElement.querySelectorAll('input:required, select:required, textarea:required');
+
+            requiredInputs.forEach(input => {
+                // Check if the field is empty (consider different input types)
+                if (input.type === 'file') {
+                     // For file inputs, check if a file has been selected
+                     if (input.files.length === 0) {
+                        isValid = false;
+                        input.classList.add('is-invalid'); // Add a visual indicator (requires CSS)
+                     } else {
+                        input.classList.remove('is-invalid');
+                     }
+                } else {
+                    if (input.value.trim() === '') {
+                        isValid = false;
+                        input.classList.add('is-invalid'); // Add a visual indicator (requires CSS)
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                }
+            });
+
+            return isValid;
+        }
+
+        // Initially show the first step
+        showStep(currentStep);
+
+        // Add event listeners for Next and Previous buttons
+        document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', () => {
+                // Validate the current step before moving to the next
+                if (validateCurrentStep()) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    // Optional: Display an error message to the user
+                    alert('Please fill in all required fields before proceeding.');
+                }
+            });
+        });
+
+        document.querySelectorAll('.prev-step').forEach(button => {
+            button.addEventListener('click', () => {
+                currentStep--;
+                showStep(currentStep);
+            });
+        });
+
+        // Optional: Handle form submission (your Django view will handle the actual saving)
+        // The form will be submitted when the last "Submit Application" button is clicked.
+        // You might want to add a final validation check here as well before submitting.
+        // document.getElementById('masters-application-form').addEventListener('submit', function(event) {
+        //     if (!validateCurrentStep()) { // Validate the last step
+        //         event.preventDefault(); // Prevent submission if the last step is invalid
+        //         alert('Please fill in all required fields before submitting.');
+        //     }
+        // });
+    });
+</script>
+
+<style>
+    /* Optional: Add some basic styling for invalid fields */
+    .is-invalid {
+        border-color: #dc3545; /* Bootstrap danger color */
+    }
+    .is-invalid:focus {
+        box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+    }
+</style>
+
+{% endblock %}

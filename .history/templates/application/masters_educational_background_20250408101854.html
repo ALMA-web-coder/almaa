@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Background</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgba(128, 0, 32, 0.1);
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgb(255, 255, 255);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color:rgb(128,0,32);
+        }
+
+        .logo-container {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+
+        .logo {
+            max-width: 100px; 
+            height: auto; 
+            margin: 30px 0; 
+        }
+
+        .logos {
+            max-width: 100px; 
+            height: auto; 
+            margin-top: -35px; 
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color:rgb(128,0,32);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            height: 40px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid rgb(128,0,32); 
+            border-radius: 4px;
+            font-size: 16px;
+            color:rgb(128,0,32); 
+            background-color:rgba(128,0,32,0.2); 
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        select:focus {
+            background-color: rgb(212,126,126); 
+            border-color: white; 
+            outline: none; 
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #a94442; 
+            background-color: #f2dede; 
+            border-color: #ebccd1; 
+        }
+
+        .form-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-right:240px;
+            padding: 10px 15px;
+            background-color:rgb(118, 17, 17);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px; 
+        }
+
+        .btn:hover {
+            background-color:rgb(140, 28, 28);
+        }
+
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color:rgb(255, 255, 255);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px; 
+            }
+
+            .logo {
+                max-width: 70px; 
+            }
+
+            .logos {
+                max-width: 70px; 
+            }
+
+            .btn {
+                width: 100%; 
+                margin-bottom: 10px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo NUST" class="logo">
+            <img src="{% static 'images/alma.png' %}" alt="Logo ALMA" class="logos">
+        </div>
+
+        <h2>Educational Background</h2>
+        
+        <form method="post" action="{% url 'authentication:application_view' %}?step=5">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                {{ form.as_p }}  
+            </div>
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}5 of 9</p>  
+    </footer>
+</body>
+</html>

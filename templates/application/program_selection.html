@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Choose Program Type</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'application_view' %}?step=1" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group mb-4">
+                            <label for="{{ form.application_type.id_for_label}}" class="form-label fw-bold">Application Type</label>
+                            <select name="{{ form.application_type.name}}"
+                                class="form-select form-select-lg"
+                                id="{{ form.application_type.id_for_label }}"
+                                required>
+                                <option value="" disabled selected>Select your program type</option>
+                                <option value="masters">Masters Program</option>
+                                <option value="certificate">Certificate Program</option>
+                            </select>
+                            {% if form.application_type.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.application_type.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="step-indicator">
+                                <span class="badge bg-primary">Step 1 of 9</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg px-4">
+                                Next <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        border: none;
+    }
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+    .form-select {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .btn-primary {
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+    }
+    .step-indicator {
+        display: flex;
+        align-items: center;
+    }
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Personal Information</h2>
+    <form method="post" action="{% url 'application_view' %}?step=2">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group mb-3">
+            <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name</label>
+            <input type="text" name="{{ form.first_name.name }}" 
+                   value="{{ form.first_name.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.first_name.id_for_label }}">
+            {% if form.first_name.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>First Name:</strong> {{ form.first_name.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.last_name.id_for_label }}" class="form-label">Last Name</label>
+            <input type="text" name="{{ form.last_name.name }}" 
+                   value="{{ form.last_name.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.last_name.id_for_label }}">
+            {% if form.last_name.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Last Name:</strong> {{ form.last_name.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.date_of_birth.id_for_label }}" class="form-label">Date of Birth</label>
+            <input type="date" name="{{ form.date_of_birth.name }}" 
+                   value="{{ form.date_of_birth.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.date_of_birth.id_for_label }}">
+            {% if form.date_of_birth.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Date of Birth:</strong> {{ form.date_of_birth.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.gender.id_for_label }}" class="form-label">Gender</label>
+            <input type="text" name="{{ form.gender.name}}"
+                    class="form-control" 
+                    value ="{{forn.gender.value|default:""}}"
+                    id="{{ form.gender.id_for_label }}">
+            {% if form.gender.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Gender:</strong> {{ form.gender.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.national_id.id_for_label }}" class="form-label">National ID</label>
+            <input type="text" name="{{ form.national_id.name }}" 
+                   value="{{ form.national_id.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.national_id.id_for_label }}">
+            {% if form.national_id.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>National ID:</strong> {{ form.national_id.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+            <select name="{{ form.title.name }}" 
+            class="form-control" 
+            id="{{ form.title.id_for_label }}">
+        <option value="" {% if not form.title.value %}selected{% endif %}>Select Title</option>
+        <option value="Mr." {% if form.title.value == "Mr." %}selected{% endif %}>Mr.</option>
+        <option value="Mrs." {% if form.title.value == "Mrs." %}selected{% endif %}>Mrs.</option>
+        <option value="Ms." {% if form.title.value == "Ms." %}selected{% endif %}>Ms.</option>
+        <option value="Dr." {% if form.title.value == "Dr." %}selected{% endif %}>Dr.</option>
+    </select>
+            {% if form.title.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Title:</strong> {{ form.title.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.marital_status.id_for_label }}" class="form-label">Marital Status</label>
+            <select name="{{ form.marital_status.name }}" 
+                    class="form-control" 
+                    id="{{ form.marital_status.id_for_label }}">
+                <option value="" {% if not form.marital_status.value %}selected{% endif %}>Select Status</option>
+                <option value="Single" {% if form.marital_status.value == "Single" %}selected{% endif %}>Single</option>
+                <option value="Married" {% if form.marital_status.value == "Married" %}selected{% endif %}>Married</option>
+                <option value="Divorced" {% if form.marital_status.value == "Divorced" %}selected{% endif %}>Divorced</option>
+                <option value="Widowed" {% if form.marital_status.value == "Widowed" %}selected{% endif %}>Widowed</option>
+            </select>
+            {% if form.marital_status.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Marital Status:</strong> {{ form.marital_status.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.place_of_birth.id_for_label }}" class="form-label">Place of Birth</label>
+            <input type="text" name="{{ form.place_of_birth.name }}" 
+                   value="{{ form.place_of_birth.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.place_of_birth.id_for_label }}">
+            {% if form.place_of_birth.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Place of Birth:</strong> {{ form.place_of_birth.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.citizenship.id_for_label }}" class="form-label">Citizenship</label>
+            <input type="text" name="{{ form.citizenship.name }}" 
+                   value="{{ form.citizenship.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.citizenship.id_for_label }}">
+            {% if form.citizenship.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Citizenship:</strong> {{ form.citizenship.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.country.id_for_label }}" class="form-label">Country</label>
+            <input type="text" name="{{ form.country.name }}" 
+                   value="{{ form.country.value|default:"" }}" 
+                   class="form-control" 
+                   id="{{ form.country.id_for_label }}">
+            {% if form.country.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Country:</strong> {{ form.country.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3 form-check">
+            <input type="checkbox" name="{{ form.disability.name }}" 
+                   value="True" 
+                   class="form-check-input" 
+                   id="{{ form.disability.id_for_label }}" 
+                   {% if form.disability.value %}checked{% endif %}>
+            <label for="{{ form.disability.id_for_label }}" class="form-check-label">Disability</label>
+            {% if form.disability.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Disability:</strong> {{ form.disability.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="{{ form.disability_details.id_for_label }}" class="form-label">Details about Disability</label>
+            <textarea name="{{ form.disability_details.name }}" 
+                      class="form-control" 
+                      id="{{ form.disability_details.id_for_label }}">{{ form.disability_details.value|default:"" }}</textarea>
+            {% if form.disability_details.errors %}
+                <div class="alert alert-danger mt-1">
+                    <strong>Details:</strong> {{ form.disability_details.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
+            {% if step|add:"-1" > 0 %}
+                <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

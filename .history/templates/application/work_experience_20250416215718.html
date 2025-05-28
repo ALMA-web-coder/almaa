@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h2>Work Experience</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=7"> 
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                <div class="form-group">
+                    <label for="{{ form.employer.id_for_label }}">Employer:</label>
+                    {{ form.employer }}
+                    {% if form.employer.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.employer.errors|join:", " }}
+                        </div>
+                    {% endif %}
+                    
+                    <label for="{{ form.work_details.id_for_label }}">Work Details:</label>
+                    {{ form.work_details }}
+                    {% if form.work_details.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.work_details.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.work_experience_from.id_for_label }}">Work Experience From:</label>
+                    {{ form.work_experience_from }}
+                    {% if form.work_experience_from.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.work_experience_from.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.work_experience_to.id_for_label }}">Work Experience To:</label>
+                    {{ form.work_experience_to }}
+                    {% if form.work_experience_to.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.work_experience_to.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.reference_1_name.id_for_label }}">Reference 1 Name:</label>
+                    {{ form.reference_1_name }}
+                    {% if form.reference_1_name.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.reference_1_name.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.reference_1_email.id_for_label }}">Reference 1 Email:</label>
+                    {{ form.reference_1_email }}
+                    {% if form.reference_1_email.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.reference_1_email.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.reference_1_phone_number.id_for_label }}">Reference 1 Phone Number:</label>
+                    {{ form.reference_1_phone_number }}
+                    {% if form.reference_1_phone_number.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.reference_1_phone_number.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.reference_2_name.id_for_label }}">Reference 2 Name:</label>
+                    {{ form.reference_2_name }}
+                    {% if form.reference_2_name.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.reference_2_name.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.reference_2_email.id_for_label }}">Reference 2 Email:</label>
+                    {{ form.reference_2_email }}
+                    {% if form.reference_2_email.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.reference_2_email.errors|join:", " }}
+                        </div>
+                    {% endif %}
+
+                    <label for="{{ form.reference_2_phone_number.id_for_label }}">Reference 2 Phone Number:</label>
+                    {{ form.reference_2_phone_number }}
+                    {% if form.reference_2_phone_number.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.reference_2_phone_number.errors|join:", " }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{%endblock%}

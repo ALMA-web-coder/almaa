@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Educational Background & Program Applied For:</h2>
+        
+        <form method="post" action="{% url 'application_view' %}?step=5">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group mb-3">
+                <label for="{{ form.period_of_study.id_for_label }}" class="form-label">Period of Study</label>
+                {{ form.period_of_study }}
+                {% if form.period_of_study.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Period of Study:</strong> {{ form.period_of_study.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.institution_attended.id_for_label }}" class="form-label">Institution Attended</label>
+                {{ form.institution_attended }}
+                {% if form.institution_attended.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Institution Attended:</strong> {{ form.institution_attended.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.level_of_study.id_for_label }}" class="form-label">Level of Study</label>
+                {{ form.level_of_study }}
+                {% if form.level_of_study.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Level of Study:</strong> {{ form.level_of_study.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.major_subjects.id_for_label }}" class="form-label">Major Subjects</label>
+                {{ form.major_subjects }}
+                {% if form.major_subjects.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Major Subjects:</strong> {{ form.major_subjects.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.date_awarded.id_for_label }}" class="form-label">Date Awarded</label>
+                {{ form.date_awarded }}
+                {% if form.date_awarded.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Date Awarded:</strong> {{ form.date_awarded.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.programme_applied_for.id_for_label }}" class="form-label">Programme Applied For</label>
+                {{ form.programme_applied_for }}
+                {% if form.programme_applied_for.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Programme Applied For:</strong> {{ form.programme_applied_for.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.preferred_learning_format.id_for_label }}" class="form-label">Preferred Learning Format</label>
+                {{ form.preferred_learning_format }}
+                {% if form.preferred_learning_format.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Preferred Learning Format:</strong> {{ form.preferred_learning_format.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.prospective_sponsors.id_for_label }}" class="form-label">Prospective Sponsors</label>
+                {{ form.prospective_sponsors }}
+                {% if form.prospective_sponsors.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Prospective Sponsors:</strong> {{ form.prospective_sponsors.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions mt-4">
+                <button type="submit" class="btn btn-primary">Next</button>
+                
+                {% if step|add:"-1" > 0 %}
+                    <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <footer class="text-center mt-4">
+        <p>Step {{ step }} of 9</p>  
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{%endblock%}

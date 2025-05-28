@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Application List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Application Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.first_name }} {{ application.last_name }}</td>
+                <td>{{ application.get_application_type_display }}</td>
+                <td>{{ application.status.first.status }}</td> 
+                <td><a href="{% url 'application_detail' application.id %}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%endblock%}

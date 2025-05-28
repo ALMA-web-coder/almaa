@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Upload Your Personal Documents</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'application_view' %}?step=3" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group mb-4">
+                            <label for="{{ form.birth_certificate.id_for_label }}" class="form-label fw-bold">Birth Certificate</label>
+                            <div class="input-group">
+                                {{ form.birth_certificate }}
+                                <label class="input-group-text" for="{{ form.birth_certificate.id_for_label }}">
+                                    <i class="fas fa-file-pdf"></i>
+                                </label>
+                            </div>
+                            {% if form.birth_certificate.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.birth_certificate.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                            <small class="form-text text-muted">Accepted formats: PDF, JPG, PNG (Max 5MB)</small>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="{{ form.id_document.id_for_label }}" class="form-label fw-bold">ID Document</label>
+                            <div class="input-group">
+                                {{ form.id_document }}
+                                <label class="input-group-text" for="{{ form.id_document.id_for_label }}">
+                                    <i class="fas fa-file-pdf"></i>
+                                </label>
+                            </div>
+                            {% if form.id_document.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.id_document.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                            <small class="form-text text-muted">Accepted formats: PDF, JPG, PNG (Max 5MB)</small>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="step-indicator">
+                                <span class="badge bg-primary">Step 3 of 9</span>
+                            </div>
+                            <div>
+                                <a href="?step=2" class="btn btn-secondary btn-lg me-2">
+                                    <i class="fas fa-arrow-left me-2"></i>Previous
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Next <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        border: none;
+    }
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+    .form-control {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .btn-primary, .btn-secondary {
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+    }
+    .step-indicator {
+        display: flex;
+        align-items: center;
+    }
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    .custom-file input[type="file"] {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .custom-file input[type="file"]:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+</style>
+{% endblock %}

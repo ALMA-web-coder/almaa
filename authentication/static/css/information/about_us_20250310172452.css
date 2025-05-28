@@ -1,0 +1,14 @@
+body{
+  overflow-x: hidden;
+}
+
+.img{
+  width: 20%;
+
+}
+
+.team-image {
+  max-width: 100%;   /* Ensures image fits within the column */
+  height: auto;      /* Maintains aspect ratio */
+}
+

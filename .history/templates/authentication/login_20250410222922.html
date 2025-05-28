@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+<form method="post" class="mb-4">
+    {% csrf_token %}
+    {{ form|as_p }}
+
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <input type="submit" value="Submit">
+
+</form>
+
+<p>To register account <a href="{% url 'register' %}">Click here</a></p>
+<p>Forgot Password?: <a href="{% url 'password_reset'%}">password_reset</a></p>
+
+{% endblock%}
+

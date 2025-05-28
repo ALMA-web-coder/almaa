@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Contact and Address Information</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'application_view' %}?step=4" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.phone_number.id_for_label }}" class="form-label fw-bold">Phone Number</label>
+                                    <input type="tel" name="{{ form.phone_number.name }}" 
+                                           value="{{ form.phone_number.value|default:'' }}"
+                                           class="form-control form-control-lg"
+                                           id="{{ form.phone_number.id_for_label }}"
+                                           required>
+                                    {% if form.phone_number.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.phone_number.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">Email</label>
+                                    <input type="email" name="{{ form.email.name }}" 
+                                           value="{{ form.email.value|default:'' }}"
+                                           class="form-control form-control-lg"
+                                           id="{{ form.email.id_for_label }}"
+                                           required>
+                                    {% if form.email.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.email.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="{{ form.permanent_address_no_street.id_for_label }}" class="form-label fw-bold">Permanent Address (No. & Street)</label>
+                            <input type="text" name="{{ form.permanent_address_no_street.name }}" 
+                                   value="{{ form.permanent_address_no_street.value|default:'' }}"
+                                   class="form-control form-control-lg"
+                                   id="{{ form.permanent_address_no_street.id_for_label }}"
+                                   required>
+                            {% if form.permanent_address_no_street.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.permanent_address_no_street.errors|join:", " }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.permanent_address_apt_unit.id_for_label }}" class="form-label fw-bold">Apt/Unit</label>
+                                    <input type="text" name="{{ form.permanent_address_apt_unit.name }}" 
+                                           value="{{ form.permanent_address_apt_unit.value|default:'' }}"
+                                           class="form-control form-control-lg"
+                                           id="{{ form.permanent_address_apt_unit.id_for_label }}">
+                                    {% if form.permanent_address_apt_unit.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.permanent_address_apt_unit.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.permanent_address_state_province.id_for_label }}" class="form-label fw-bold">State/Province</label>
+                                    <input type="text" name="{{ form.permanent_address_state_province.name }}" 
+                                           value="{{ form.permanent_address_state_province.value|default:'' }}"
+                                           class="form-control form-control-lg"
+                                           id="{{ form.permanent_address_state_province.id_for_label }}"
+                                           required>
+                                    {% if form.permanent_address_state_province.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.permanent_address_state_province.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.home_phone.id_for_label }}" class="form-label fw-bold">Home Phone</label>
+                                    <input type="tel" name="{{ form.home_phone.name }}" 
+                                           value="{{ form.home_phone.value|default:'' }}"
+                                           class="form-control form-control-lg"
+                                           id="{{ form.home_phone.id_for_label }}">
+                                    {% if form.home_phone.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.home_phone.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label for="{{ form.office_phone.id_for_label }}" class="form-label fw-bold">Office Phone</label>
+                                    <input type="tel" name="{{ form.office_phone.name }}" 
+                                           value="{{ form.office_phone.value|default:'' }}"
+                                           class="form-control form-control-lg"
+                                           id="{{ form.office_phone.id_for_label }}">
+                                    {% if form.office_phone.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.office_phone.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="step-indicator">
+                                <span class="badge bg-primary">Step 4 of 9</span>
+                            </div>
+                            <div>
+                                <a href="?step=3" class="btn btn-secondary btn-lg me-2">
+                                    <i class="fas fa-arrow-left me-2"></i>Previous
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Next <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        border: none;
+    }
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+    .form-control {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .btn-primary, .btn-secondary {
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+    }
+    .step-indicator {
+        display: flex;
+        align-items: center;
+    }
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}

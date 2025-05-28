@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Personal Information</h2>
+    <form method="post" action="{% url 'application_view' %}?step=2">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}  <!-- Render the field as is; Bootstrap styles will be applied if widget is default -->
+                    
+                    {% if field.errors %}
+                        <div class="alert alert-danger mt-1">
+                            <strong>{{ field.label }}:</strong> {{ field.errors|join:", " }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
+            {% if step|add:"-1" > 0 %}
+                <a href="?step={{ step|add:"-1" }}" class="btn btn-secondary">Previous</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

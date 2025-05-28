@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Cancelled</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Payment Cancelled</h1>
+        <p class="lead">Your payment was cancelled. If you have any questions, please contact support.</p>
+        <a href="{% url 'homepage' %}" class="btn btn-primary">Go to Home</a>
+    </div>
+</body>
+</html>
+{% endblock %}

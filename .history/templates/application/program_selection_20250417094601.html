@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+        <h2>Choose Program Type</h2>
+        <form method="post" action="{% url 'application_view' %}?step=1"> 
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group mb-3">
+                <label for="{{ form.application_type.id_for_label}}" class="form-label"> Gender </label>
+                <select name ="{{ form.application_type.name}}"
+                    class="form-control"
+                    id="{{ form.application_type.id_for_label }}">
+                    <option value="" {% if not form. application_type.value %}selected{% endif %}> Masters</option> 
+                    <option value="" {% if not form. application_type.value %}selected{% endif %}> Certificate</option> 
+                </select>
+               {% if form.application_type.errors %}
+                 <div class="alert alert-danger mt-1">
+                    <strong> Applicarion Type:</strong> {{ form.application_type.errors|join:", "}}
+                 </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="{{ form.gender.id_for_label }}" class="form-label">Gender</label>
+                <select name="{{ form.gender.name }}" 
+                        class="form-control" 
+                        id="{{ form.gender.id_for_label }}">
+                    <option value="" {% if not form.gender.value %}selected{% endif %}>Select Gender</option>
+                    <option value="Male" {% if form.gender.value == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if form.gender.value == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if form.gender.value == "Other" %}selected{% endif %}>Other</option>
+                </select>
+                {% if form.gender.errors %}
+                    <div class="alert alert-danger mt-1">
+                        <strong>Gender:</strong> {{ form.gender.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            {% for field in form %}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field.label }}:</strong> {{ field.errors.as_text|linebreaks }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>Step {{ step }}1 of 9</p>  
+    </footer>
+
+{% endblock %}

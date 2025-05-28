@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static%}
+
+
+{% block content%}
+
+<h1>
+    This is the Homepage
+</h1>
+
+<ul>
+    <li><a href="{% url 'authentication:application_view'%}" >Apply Now</a></li>
+    <li><a href="{% url 'authentication:track_application'%}" >Track Application</a></li>
+</ul>
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Logout">
+</form>
+
+
+{% endblock%}
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4; /* Light gray background */
+        }
+
+        h1 {
+            color: #333; /* Dark gray heading color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff; /* White form background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555; /* Medium gray label color */
+        }
+
+        input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50; /* Green button color */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 25px;
+            text-align: center; /* Center the "Your Application Details" heading */
+        }
+
+        /* Style for the error message (already present but making it more robust) */
+        .error-message {
+          color: red;
+          margin-bottom: 10px;
+          text-align: center; /* Center the error message */
+        }
+
+        /* Style for application details */
+        .application-details {
+          background-color: #fff;
+          padding: 15px;
+          border-radius: 8px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+          margin-top: 15px;
+          max-width: 400px;
+          margin: 20px auto;
+        }
+
+        .application-details p {
+          margin-bottom: 8px;
+          color: #333;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Track Your Application</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="application_id">Application ID:</label>
+        <input type="number" 
+               id="application_id" 
+               name="application_id" 
+               placeholder="Enter your Application ID" 
+               required
+               min="1">
+        <button type="submit">Check Status</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    {% if application %}
+        <div class="application-details">
+            <h3>Application Details</h3>
+            <p>Application Type: {{ application.application_type }}</p>
+
+            
+            {% if latest_status %}
+                <p>Current Status: <strong>{{ latest_status.status }}</strong></p>
+                {% if latest_status.comments %}
+                    <p>Comments: {{ latest_status.comments }}</p>
+                {% endif %}
+            {% else %}
+                <p>Status: Pending review</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
