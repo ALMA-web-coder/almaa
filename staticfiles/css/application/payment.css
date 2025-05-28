@@ -1,0 +1,63 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle, rgba(28, 27, 27, 0.5),rgba(211,211,211,1));
+
+}
+
+h1{
+  display: flex;
+  color: white;
+  justify-content: center;
+}
+
+.par{
+  background-color: rgba(0, 128, 32,0.1);
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.button{
+  margin-top: 50px;
+  padding-top: 30px;
+  text-align: center;
+  
+}
+
+fieldset{
+ padding: 20px;
+}
+
+.box-btn{
+  width: 200px;
+  height: 200px;
+  padding: 55px;
+  border-radius: 50%;
+  background-color:  rgba(128, 0,32,0.5);
+  margin-top: 50px;
+}
+
+.box-btn:hover{ 
+  background-color: rgba(128, 0,32,0.5);
+  transform: scale(0.5);
+}
+
+legend{
+  color:  rgb(128, 0,32);
+}
+
+label{
+  background-color:  rgba(128, 0,32,0.5);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
