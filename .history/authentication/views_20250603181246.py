@@ -105,23 +105,21 @@ def cookie_policy(request):
 @login_required(login_url='login')
 def homepage(request):
     user = request.user
-    application = None
-    latest_status = None
-    status_display = None
     try:
         application = Application.objects.get(user=user)
         # Get the latest status based on updated_at
         latest_status = application.statuses.order_by('-updated_at').first()
         status_display = latest_status.status if latest_status else None
     except Application.DoesNotExist:
-        pass
+        application = None
+        status_display = None
 
     context = {
         'application': application,
         'status_display': status_display,
         'latest_status': latest_status,  
     }
-    return render(request, 'homepage.html', context)
+    return render(request, 'homepage.html')
 
 
 def register(request):

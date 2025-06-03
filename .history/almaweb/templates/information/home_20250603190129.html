@@ -39,11 +39,30 @@
             filter: invert(1); /* Invert the icon colors to white */
         }
 
+        nav.navbar .navbar-nav {
+   flex-direction: row !important;
+        }
         .active-link {
             color:rgb(8, 77, 35) !important;
         }
 
        
+       
+   @media (min-width: 1000px) {
+  /* Target the expanded menu */
+  .navbar-collapse.show .navbar-nav {
+    flex-wrap: nowrap !important;
+    white-space: nowrap;
+  }
+}
+
+  @media (min-width: 480px) {
+  /* Target the expanded menu */
+  .navbar-collapse.show .navbar-nav {
+    flex-wrap: wrap;
+    white-space: wrap;
+  }
+}
 
         .color-link{
             color: #d9534f !important;

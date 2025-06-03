@@ -40,17 +40,14 @@
                 </select>
             </div>
         </div>
-        
-{% if status_display %}
-<div class="row justify-content-center mt-3">
-    <div class="col-12 text-center">
-        <h4>Your application status: {{ status_display }}</h4>
-        {% if latest_status.comments %}
-            <p>{{ latest_status.comments }}</p>
+
+        {% if status %}
+            <div class="row justify-content-center mt-3">
+                <div class="col-12 text-center">
+                   <h4 style="color:black;"> Your application status: {{ status }}</h4>
+                </div>
+            </div>
         {% endif %}
-    </div>
-</div>
-{% endif %}
    
   
 
