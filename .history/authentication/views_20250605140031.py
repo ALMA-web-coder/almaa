@@ -335,7 +335,7 @@ def prepare_uploaded_files(files):
 def masters_application(request):
     user = request.user
     try:
-        # Check if the user already has a 'masters' application
+        # Check if the user already has an application
         application = Application.objects.get(user=user, application_type='masters')
         application_exists = True
     except Application.DoesNotExist:
@@ -343,103 +343,60 @@ def masters_application(request):
         application_exists = False
 
     if request.method == "POST":
-        # Instantiate forms with POST data and files, passing existing instances if available
-        personal_info_form = PersonalInfoForm(
-            request.POST, 
-            instance=application if application_exists else None
-        )
-        documents_upload_form = DocumentUploadForm(
-            request.POST, request.FILES, 
-            instance=getattr(application, 'documents', None) if application_exists else None
-        )
-        contact_and_address_form = ContactAndAddressForm(
-            request.POST, 
-            instance=getattr(application, 'contacts', None) if application_exists else None
-        )
-        educational_form = EducationalBackgroundMastersForm(
-            request.POST, 
-            instance=getattr(application, 'educational', None) if application_exists else None
-        )
-        document_upload_form = MastersEducationalDocumentForm(
-            request.POST, request.FILES, 
-            instance=getattr(application, 'masters', None) if application_exists else None
-        )
-        work_experience_form = WorkExperienceForm(
-            request.POST, 
-            instance=getattr(application, 'work_experiences', None) if application_exists else None
-        )
-        other_info_form = OtherInfoForm(
-            request.POST, 
-            instance=getattr(application, 'other', None) if application_exists else None
-        )
+        # Create all the forms with POST data and files
+        personal_info_form = PersonalInfoForm(request.POST, instance=application.personalinformation if application_exists else None)
+        documents_upload_form = DocumentUploadForm(request.POST, request.FILES, instance=getattr(application, 'documents', None))
+        contact_and_address_form = ContactAndAddressForm(request.POST, instance=getattr(application, 'contact', None))
+        educational_form = EducationalBackgroundMastersForm(request.POST, instance=getattr(application, 'masterseducational', None))
+        document_upload_form = MastersEducationalDocumentForm(request.POST, request.FILES, instance=getattr(application, 'mastersdocuments', None))
+        work_experience_form = WorkExperienceForm(request.POST, instance=getattr(application, 'workexperience', None))
+        other_info_form = OtherInfoForm(request.POST, instance=getattr(application, 'other', None))
 
         # Validate all forms
-        if all([
-            personal_info_form.is_valid(),
-            documents_upload_form.is_valid(),
-            contact_and_address_form.is_valid(),
-            educational_form.is_valid(),
-            document_upload_form.is_valid(),
-            work_experience_form.is_valid(),
-            other_info_form.is_valid()
-        ]):
-            # Save or update application
+        if (personal_info_form.is_valid() and documents_upload_form.is_valid() and 
+            contact_and_address_form.is_valid() and educational_form.is_valid() and 
+            document_upload_form.is_valid() and work_experience_form.is_valid() and 
+            other_info_form.is_valid()):
+
+            print("All forms are valid.")
+
             if application_exists:
+                # Update existing application and related models
                 application = personal_info_form.save(commit=False)
                 application.save()
 
-                # Save related models
-                doc = documents_upload_form.save(commit=False)
-                doc.application = application
-                doc.save()
+                documents = documents_upload_form.save(commit=False)
+                documents.application = application
+                documents.save()
 
-                # Update or create related models
-                Contact.objects.update_or_create(
-                    application=application,
-                    defaults=contact_and_address_form.cleaned_data
-                )
-                MastersEducational.objects.update_or_create(
-                    application=application,
-                    defaults=educational_form.cleaned_data
-                )
-                masters_docs = document_upload_form.save(commit=False)
-                masters_docs.application = application
-                masters_docs.save()
+                Contact.objects.update_or_create(application=application, defaults=contact_and_address_form.cleaned_data)
+                MastersEducational.objects.update_or_create(application=application, defaults=educational_form.cleaned_data)
+                masters_documents = document_upload_form.save(commit=False)
+                masters_documents.application = application
+                masters_documents.save()
+                WorkExperience.objects.update_or_create(application=application, defaults=work_experience_form.cleaned_data)
+                Other.objects.update_or_create(application=application, defaults=other_info_form.cleaned_data)
 
-                WorkExperience.objects.update_or_create(
-                    application=application,
-                    defaults=work_experience_form.cleaned_data
-                )
-                Other.objects.update_or_create(
-                    application=application,
-                    defaults=other_info_form.cleaned_data
-                )
-
-                # Update status
-                Status.objects.update_or_create(
-                    application=application,
-                    defaults={'status': 'Submitted'}
-                )
+                # Update status if needed
+                Status.objects.update_or_create(application=application, defaults={'status': 'Submitted'})
 
             else:
-                # Create new application
+                # Create new application and related models
                 application = Application.objects.create(
                     user=user,
                     application_type='masters',
                     **personal_info_form.cleaned_data
                 )
 
-                # Save related models
-                doc = documents_upload_form.save(commit=False)
-                doc.application = application
-                doc.save()
+                documents = documents_upload_form.save(commit=False)
+                documents.application = application
+                documents.save()
 
                 Contact.objects.create(application=application, **contact_and_address_form.cleaned_data)
                 MastersEducational.objects.create(application=application, **educational_form.cleaned_data)
-                masters_docs = document_upload_form.save(commit=False)
-                masters_docs.application = application
-                masters_docs.save()
-
+                masters_documents = document_upload_form.save(commit=False)
+                masters_documents.application = application
+                masters_documents.save()
                 WorkExperience.objects.create(application=application, **work_experience_form.cleaned_data)
                 Other.objects.create(application=application, **other_info_form.cleaned_data)
 
@@ -447,29 +404,32 @@ def masters_application(request):
 
             # Redirect to payment
             return redirect('paynow_payment', application_id=application.id)
+
         else:
             # Handle form errors
+            print("Form errors:")
+            # (print errors as you already do)
             messages.error(request, 'Please correct the errors in your application data.')
+            # Fall through to re-render with errors
 
     else:
-        # Initialize forms with existing data if application exists
+        # Initialize forms with existing data if application exists, else blank
         if application_exists:
-            personal_info_form = PersonalInfoForm(instance=application)
-            contact_and_address_form = ContactAndAddressForm(instance=application.contacts.first())
-            educational_form = EducationalBackgroundMastersForm(instance=application.educational.first())
-            document_upload_form = MastersEducationalDocumentForm(instance=application.masters.first())
-            work_experience_form = WorkExperienceForm(instance=application.work_experiences.first())
-            other_info_form = OtherInfoForm(instance=application.other.first())
-            documents_upload_form = DocumentUploadForm(instance=application.documents.first())
+            personal_info_form = PersonalInfoForm(instance=application.personalinformation)
+            documents_upload_form = DocumentUploadForm(instance=getattr(application, 'documents', None))
+            contact_and_address_form = ContactAndAddressForm(instance=getattr(application, 'contact', None))
+            educational_form = EducationalBackgroundMastersForm(instance=getattr(application, 'masterseducational', None))
+            document_upload_form = MastersEducationalDocumentForm(instance=getattr(application, 'mastersdocuments', None))
+            work_experience_form = WorkExperienceForm(instance=getattr(application, 'workexperience', None))
+            other_info_form = OtherInfoForm(instance=getattr(application, 'other', None))
         else:
-            # Blank forms for new application
             personal_info_form = PersonalInfoForm()
+            documents_upload_form = DocumentUploadForm()
             contact_and_address_form = ContactAndAddressForm()
             educational_form = EducationalBackgroundMastersForm()
             document_upload_form = MastersEducationalDocumentForm()
             work_experience_form = WorkExperienceForm()
             other_info_form = OtherInfoForm()
-            documents_upload_form = DocumentUploadForm()
 
     return render(request, 'application/masters_application.html', {
         'personal_info_form': personal_info_form,
