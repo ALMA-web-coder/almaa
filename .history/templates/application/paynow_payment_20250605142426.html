@@ -73,11 +73,14 @@
 
 <div class="payment-container">
     <h1 class="payment-title">Paynow Payment</h1>
-    <p class="payment-info"><strong>The application fee Amount is $20</strong></p>
-
+    <p class="payment-info">Application ID: {{ application.id }}</p>
+    <p> Write down and store  the Application ID in your phone or notebook and it will be used to track your application status!</p>
     <p class="payment-info">Applicant: {{ application.user.get_full_name }}</p>
-     
-    
+    <div class="row">
+            <div class="col-12">
+                <p class="payment-info">The application fee Amount is $20</p>
+            </div>
+        <div>
 
     <form action="{% url 'paynow_payment' application_id=application.id %}" method="post" class="payment-form">
         {% csrf_token %}
@@ -96,6 +99,8 @@
                 
             </select>
         </div>
+
+
 
         <div class="form-group">
             <label for="amount">Amount</label>
