@@ -6,7 +6,17 @@ from .models import Article
 from .models import News 
 
 
+def acca(request):
+    fundamental_programs = Acca.objects.filter(level='FUNDAMENTAL')
+    applied_skills_programs = Acca.objects.filter(level='APPLIED_SKILLS')
+    strategic_programs = Acca.objects.filter(level='STRATEGIC_PROFESSIONAL')
 
+    context = {
+        'fundamental_programs': fundamental_programs,
+        'applied_skills_programs': applied_skills_programs,
+        'strategic_programs': strategic_programs,
+    }
+    return render(request, 'application/acca.html', context)
 
 def home(request):
     latest_news = News.objects.all().order_by('-date_posted')

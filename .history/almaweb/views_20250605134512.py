@@ -6,7 +6,9 @@ from .models import Article
 from .models import News 
 
 
-
+def acca(request):
+    
+    return render(request, 'application/acca.html')
 
 def home(request):
     latest_news = News.objects.all().order_by('-date_posted')
