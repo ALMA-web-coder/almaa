@@ -101,7 +101,17 @@ def application_detail(request, application_id):
 def cookie_policy(request):
     return render(request, 'cookie.html')
 
+def acca(request):
+    fundamental_programs = Acca.objects.filter(level='FUNDAMENTAL')
+    applied_skills_programs = Acca.objects.filter(level='APPLIED_SKILLS')
+    strategic_programs = Acca.objects.filter(level='STRATEGIC_PROFESSIONAL')
 
+    context = {
+        'fundamental_programs': fundamental_programs,
+        'applied_skills_programs': applied_skills_programs,
+        'strategic_programs': strategic_programs,
+    }
+    return render(request, 'application/acca.html', context)
 
 @login_required(login_url='login')
 def homepage(request):

@@ -19,19 +19,21 @@ def acca(request):
     return render(request, 'application/acca.html', context)
 
 def home(request):
+    # Fetch all news items, ordered by date_posted (latest first)
     latest_news = News.objects.all().order_by('-date_posted')
-    
+    #Fetch all Acca programs, ordered by level
     fundamental_programs = Acca.objects.filter(level='FUNDAMENTAL')
     applied_skills_programs = Acca.objects.filter(level='APPLIED_SKILLS')
     strategic_programs = Acca.objects.filter(level='STRATEGIC_PROFESSIONAL')
-    
+
     context = {
-        'latest_news': latest_news,
         'fundamental_programs': fundamental_programs,
         'applied_skills_programs': applied_skills_programs,
         'strategic_programs': strategic_programs,
     }
-    return render(request, 'information/home.html', context)
+    
+    # Render the home page with the latest news context
+    return render(request, 'information/home.html', {'latest_news': latest_news})
 
 def news_list(request): 
     news_items = News.objects.all().order_by('-date_posted') 

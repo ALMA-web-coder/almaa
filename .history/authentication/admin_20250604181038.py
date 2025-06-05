@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Application, CertificateDocuments, CertificateEducational, Contact, MastersDocuments, MastersEducational, Other, Status, WorkExperience, Documents, ApplicationPayments, GeneralPayments, Acca
+from .models import Application, CertificateDocuments, CertificateEducational, Contact, MastersDocuments, MastersEducational, Other, Status, WorkExperience, Documents, ApplicationPayments, GeneralPayments, Acca, FocusArea
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Download
@@ -130,7 +130,14 @@ class GeneralPaymentsAdmin(admin.ModelAdmin):
 custom_admin_site.register(GeneralPayments, GeneralPaymentsAdmin)
 
 class AccaAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description','level', 'level_selection', 'module_name', 'focus',)
-    search_fields = ('name', 'description', 'level', 'level_selection', 'module_name', 'focus')
-    
+    list_display = ('name', 'description', 'level', 'get_focus_areas')
+    search_fields = ('name', 'description', 'level', 'focus_areas__name')  # Search focus areas by name
+    filter_horizontal = ('focus_areas',)  # Provides a nice UI for many-to-many selection
+
+    def get_focus_areas(self, obj):
+        # Return a comma-separated list of focus area names
+        return ", ".join([focus.name for focus in obj.focus_areas.all()])
+    get_focus_areas.short_description = 'Focus Areas'
+
+# Register your model admin
 custom_admin_site.register(Acca, AccaAdmin)

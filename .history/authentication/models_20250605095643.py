@@ -264,6 +264,7 @@ class Acca(models.Model):
     application = models.ForeignKey(Application, related_name= 'accas', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='acca_images/', blank=True, null=True)
     level_choices =[
         ('FUNDAMENTAL', 'Applied Knowledge'),
         ('APPLIED_SKILLS', 'Applied Skills'),

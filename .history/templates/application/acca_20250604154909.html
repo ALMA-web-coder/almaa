@@ -1,0 +1,74 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/acca.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h1>ACCA Programs</h1>
+{% endblock %}
+
+
+<!-- application/acca.html -->
+
+<h1>ACCA Programs Overview</h1>
+
+<!-- Fundamental Level Programs -->
+<h2>Fundamental Level</h2>
+{% if fundamental_programs %}
+    {% for program in fundamental_programs %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>{{ program.name }}</h3>
+            <p><strong>Level:</strong> {{ program.get_level_display }}</p>
+            {% if program.focus_area %}
+                <p><strong>Focus Area:</strong> {{ program.focus_area }}</p>
+            {% endif %}
+            {% if program.description %}
+                <p><strong>Description:</strong> {{ program.description }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No Fundamental level programs available at the moment.</p>
+{% endif %}
+
+<!-- Applied Skills Level Programs -->
+<h2>Applied Skills Level</h2>
+{% if applied_skills_programs %}
+    {% for program in applied_skills_programs %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>{{ program.name }}</h3>
+            <p><strong>Level:</strong> {{ program.get_level_display }}</p>
+            {% if program.focus_area %}
+                <p><strong>Focus Area:</strong> {{ program.focus_area }}</p>
+            {% endif %}
+            {% if program.description %}
+                <p><strong>Description:</strong> {{ program.description }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No Applied Skills level programs available at the moment.</p>
+{% endif %}
+
+<!-- Strategic Professional Level Programs -->
+<h2>Strategic Professional Level</h2>
+{% if strategic_programs %}
+    {% for program in strategic_programs %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>{{ program.name }}</h3>
+            <p><strong>Level:</strong> {{ program.get_level_display }}</p>
+            {% if program.focus_area %}
+                <p><strong>Focus Area:</strong> {{ program.focus_area }}</p>
+            {% endif %}
+            {% if program.description %}
+                <p><strong>Description:</strong> {{ program.description }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No Strategic Professional level programs available at the moment.</p>
+{% endif %}
+
+{% block content %}

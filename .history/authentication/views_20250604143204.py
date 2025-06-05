@@ -101,6 +101,10 @@ def application_detail(request, application_id):
 def cookie_policy(request):
     return render(request, 'cookie.html')
 
+def acca(request):
+    acca = Acca.objects.all()  # Fetch all ACCA records
+    return render(request, 'application/acca.html', {'acca': acca})
+
 
 
 @login_required(login_url='login')

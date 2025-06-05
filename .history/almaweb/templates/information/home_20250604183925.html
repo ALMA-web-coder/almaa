@@ -334,16 +334,9 @@
 <br>
 
 <!--Acca Programs-->
-<div class="row">
-    <div class="col-lg-12">
-        <h2 class="text-center" id="accaPrograms">ACCA Programs</h2>
-        <p class="text-center">Explore our ACCA programs designed to equip you with the skills and knowledge needed for a successful career in accounting and finance.</p>
-    </div>
-</div>
-<div class="row">
+<h1>ACCA Programs Overview</h1>
 
 <!-- Fundamental Level Programs -->
- <div class="col-4">
 <h2>Fundamental Level</h2>
 {% if fundamental_programs %}
     {% for program in fundamental_programs %}
@@ -353,16 +346,15 @@
             {% if program.description %}
                 <p><strong>Description:</strong> {{ program.description }}</p>
             {% endif %}
-             {% if program.focus_areas %}
-                <p><strong>Focus Area:</strong> {{ program.focus_areas }}</p>
+             {% if acca.focus_areas %}
+                <p><strong>Focus Area:</strong> {{ acca.focus_areas }}</p>
             {% endif %}
         </div>
     {% endfor %}
 {% else %}
     <p>No Fundamental level programs available at the moment.</p>
 {% endif %}
-    </div>
-<div class="col-4">
+
 <!-- Applied Skills Level Programs -->
 <h2>Applied Skills Level</h2>
 {% if applied_skills_programs %}
@@ -381,7 +373,7 @@
 {% else %}
     <p>No Applied Skills level programs available at the moment.</p>
 {% endif %}
-    </div>
+
 <!-- Strategic Professional Level Programs -->
 <h2>Strategic Professional Level</h2>
 {% if strategic_programs %}
@@ -400,7 +392,7 @@
 {% else %}
     <p>No Strategic Professional level programs available at the moment.</p>
 {% endif %}
-    </div>
+
 <!--More Infor section-->
 <section class="container-fluid" style="position: relative;">
     <img src="{% static 'images/bks.jpg' %}" alt="ALMA" class="img-fluid" style="width:100%; height: 100vh; object-fit: cover;   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));">

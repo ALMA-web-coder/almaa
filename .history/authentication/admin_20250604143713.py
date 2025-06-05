@@ -130,7 +130,7 @@ class GeneralPaymentsAdmin(admin.ModelAdmin):
 custom_admin_site.register(GeneralPayments, GeneralPaymentsAdmin)
 
 class AccaAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description','level', 'level_selection', 'module_name', 'focus',)
-    search_fields = ('name', 'description', 'level', 'level_selection', 'module_name', 'focus')
+    list_display = ('name', 'description',)
+    search_fields = ('name', 'description',)
     
 custom_admin_site.register(Acca, AccaAdmin)
