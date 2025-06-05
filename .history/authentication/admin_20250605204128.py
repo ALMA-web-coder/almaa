@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Application, CertificateDocuments, CertificateEducational, Contact, MastersDocuments, MastersEducational, Other, Status, WorkExperience, Documents, ApplicationPayments, GeneralPayments
+from .models import Application, CertificateDocuments, CertificateEducational, Contact, MastersDocuments, MastersEducational, Other, Status, WorkExperience, Documents, ApplicationPayments, GeneralPayments, Acca
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Download
