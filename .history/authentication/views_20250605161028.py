@@ -331,165 +331,157 @@ def prepare_session_data(form_data):
 def prepare_uploaded_files(files):
     """Extract file information into a serializable format."""
     return {file.name: {'size': file.size, 'content_type': file.content_type} for file in files.values()}
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Application, Contact, MastersEducational, Documents, WorkExperience, Other, Status
+from .forms import (
+    PersonalInfoForm,
+    ContactAndAddressForm,
+    EducationalBackgroundMastersForm,
+    DocumentUploadForm,
+    MastersEducationalDocumentForm,
+    WorkExperienceForm,
+    OtherInfoForm
+)
+
 @login_required(login_url='login')
 def masters_application(request):
-    user = request.user
+    # Attempt to fetch existing application and related data
     try:
-        # Check if the user already has a 'masters' application
-        application = Application.objects.get(user=user, application_type='masters')
-        application_exists = True
+        application = Application.objects.get(user=request.user, application_type='masters')
+        contact = Contact.objects.filter(application=application).first()
+        educational = MastersEducational.objects.filter(application=application).first()
+        documents = Documents.objects.filter(application=application).first()
+        work_experience = WorkExperience.objects.filter(application=application).first()
+        other = Other.objects.filter(application=application).first()
     except Application.DoesNotExist:
         application = None
-        application_exists = False
+        contact = None
+        educational = None
+        documents = None
+        work_experience = None
+        other = None
 
     if request.method == "POST":
-        # Prepare related instances safely
-        contact_instance = (
-            application.contacts.first() if application.contacts.exists() else None
-        )
-        educational_instance = (
-            application.educational.first() if application.educational.exists() else None
-        )
-        work_experience_instance = (
-            application.work_experiences.first() if application.work_experiences.exists() else None
-        )
-        other_instance = (
-            application.other.first() if application.other.exists() else None
-        )
-        document_instance = (
-            application.documents.first() if application.documents.exists() else None
-        )
-        master_instance = (
-            application.masters.first() if hasattr(application, 'masters') and application.masters.exists() else None
-        )
-
-        # Instantiate forms with POST data and existing instances
-        personal_info_form = PersonalInfoForm(
-            request.POST,
-            instance=application if application_exists else None
-        )
-        documents_upload_form = DocumentUploadForm(
-            request.POST, request.FILES,
-            instance=document_instance
-        )
-        contact_and_address_form = ContactAndAddressForm(
-            request.POST,
-            instance=contact_instance
-        )
-        educational_form = EducationalBackgroundMastersForm(
-            request.POST,
-            instance=educational_instance
-        )
-        document_upload_form = MastersEducationalDocumentForm(
-            request.POST, request.FILES,
-            instance=master_instance
-        )
-        work_experience_form = WorkExperienceForm(
-            request.POST,
-            instance=work_experience_instance
-        )
-        other_info_form = OtherInfoForm(
-            request.POST,
-            instance=other_instance
-        )
+        # Initialize forms with POST data
+        personal_info_form = PersonalInfoForm(request.POST)
+        contact_and_address_form = ContactAndAddressForm(request.POST)
+        educational_form = EducationalBackgroundMastersForm(request.POST)
+        documents_upload_form = DocumentUploadForm(request.POST, request.FILES)
+        document_upload_form = MastersEducationalDocumentForm(request.POST, request.FILES)
+        work_experience_form = WorkExperienceForm(request.POST)
+        other_info_form = OtherInfoForm(request.POST)
 
         # Validate all forms
-        if all([
-            personal_info_form.is_valid(),
-            documents_upload_form.is_valid(),
-            contact_and_address_form.is_valid(),
-            educational_form.is_valid(),
-            document_upload_form.is_valid(),
-            work_experience_form.is_valid(),
-            other_info_form.is_valid(),
-        ]):
-            # Save or update application
-            if not application_exists:
+        if (personal_info_form.is_valid() and contact_and_address_form.is_valid() and
+            educational_form.is_valid() and documents_upload_form.is_valid() and
+            document_upload_form.is_valid() and work_experience_form.is_valid() and
+            other_info_form.is_valid()):
+            
+            if application:
+                # Update existing application
+                for field, value in personal_info_form.cleaned_data.items():
+                    setattr(application, field, value)
+                application.save()
+
+                # Save or update Documents
+                if documents:
+                    for field, value in documents_upload_form.cleaned_data.items():
+                        setattr(documents, field, value)
+                    documents.application = application
+                    documents.save()
+                else:
+                    documents = documents_upload_form.save(commit=False)
+                    documents.application = application
+                    documents.save()
+
+                # Save or update Contact
+                if contact:
+                    for field, value in contact_and_address_form.cleaned_data.items():
+                        setattr(contact, field, value)
+                    contact.application = application
+                    contact.save()
+                else:
+                    Contact.objects.create(application=application, **contact_and_address_form.cleaned_data)
+
+                # Save or update Educational
+                if educational:
+                    for field, value in educational_form.cleaned_data.items():
+                        setattr(educational, field, value)
+                    educational.application = application
+                    educational.save()
+                else:
+                    MastersEducational.objects.create(application=application, **educational_form.cleaned_data)
+
+                # Save or update WorkExperience
+                if work_experience:
+                    for field, value in work_experience_form.cleaned_data.items():
+                        setattr(work_experience, field, value)
+                    work_experience.application = application
+                    work_experience.save()
+                else:
+                    WorkExperience.objects.create(application=application, **work_experience_form.cleaned_data)
+
+                # Save or update Other
+                if other:
+                    for field, value in other_info_form.cleaned_data.items():
+                        setattr(other, field, value)
+                    other.application = application
+                    other.save()
+                else:
+                    Other.objects.create(application=application, **other_info_form.cleaned_data)
+
+                # Optionally, update status if needed
+                # Status.objects.update_or_create(application=application, defaults={'status':'Submitted'})
+
+            else:
                 # Create new application
                 application = Application.objects.create(
-                    user=user,
+                    user=request.user,
                     application_type='masters',
                     **personal_info_form.cleaned_data
                 )
 
-            else:
-                # Update existing application if needed
-                application = application
+                # Save related models
+                documents = documents_upload_form.save(commit=False)
+                documents.application = application
+                documents.save()
 
-            # Save related models
-            # Save documents upload
-            doc = documents_upload_form.save(commit=False)
-            doc.application = application
-            doc.save()
+                Contact.objects.create(application=application, **contact_and_address_form.cleaned_data)
+                MastersEducational.objects.create(application=application, **educational_form.cleaned_data)
 
-            # Save contact info
-            Contact.objects.update_or_create(
-                application=application,
-                defaults=contact_and_address_form.cleaned_data
-            )
+                document = document_upload_form.save(commit=False)
+                document.application = application
+                document.save()
 
-            # Save educational info
-            MastersEducational.objects.update_or_create(
-                application=application,
-                defaults=educational_form.cleaned_data
-            )
+                WorkExperience.objects.create(application=application, **work_experience_form.cleaned_data)
+                Other.objects.create(application=application, **other_info_form.cleaned_data)
 
-            # Save masters educational details
-            masters_docs = document_upload_form.save(commit=False)
-            masters_docs.application = application
-            masters_docs.save()
+                # Save status
+                Status.objects.create(application=application, status='Submitted')
 
-            # Save work experience
-            WorkExperience.objects.update_or_create(
-                application=application,
-                defaults=work_experience_form.cleaned_data
-            )
-
-            # Save other info
-            Other.objects.update_or_create(
-                application=application,
-                defaults=other_info_form.cleaned_data
-            )
-
-            # Create status
-            Status.objects.create(application=application, status='Submitted')
-
-            # Redirect to payment
             return redirect('paynow_payment', application_id=application.id)
         else:
-            # Handle form errors
             messages.error(request, 'Please correct the errors in your application data.')
-
     else:
-        # Initialize forms with existing data if application exists
-        if application_exists:
+        # Initialize forms with existing data
+        if application:
             personal_info_form = PersonalInfoForm(instance=application)
-            contact_and_address_form = ContactAndAddressForm(
-                instance=application.contacts.first() if application.contacts.exists() else None
-            )
-            educational_form = EducationalBackgroundMastersForm(
-                instance=application.educational.first() if application.educational.exists() else None
-            )
-            document_instance = (
-                application.documents.first() if application.documents.exists() else None
-            )
-            master_instance = (
-                application.masters.first() if hasattr(application, 'masters') and application.masters.exists() else None
-            )
-            work_experience_instance = (
-                application.work_experiences.first() if application.work_experiences.exists() else None
-            )
-            other_instance = (
-                application.other.first() if application.other.exists() else None
-            )
+            contact = Contact.objects.filter(application=application).first()
+            educational = MastersEducational.objects.filter(application=application).first()
+            documents = Documents.objects.filter(application=application).first()
+            work_experience = WorkExperience.objects.filter(application=application).first()
+            other = Other.objects.filter(application=application).first()
 
-            documents_upload_form = DocumentUploadForm(instance=document_instance)
-            educational_form = EducationalBackgroundMastersForm(instance=application.educational.first() if application.educational.exists() else None)
-            document_upload_form = MastersEducationalDocumentForm(instance=master_instance)
-            work_experience_form = WorkExperienceForm(instance=work_experience_instance)
-            other_info_form = OtherInfoForm(instance=other_instance)
+            contact_and_address_form = ContactAndAddressForm(instance=contact)
+            educational_form = EducationalBackgroundMastersForm(instance=educational)
+            documents_upload_form = DocumentUploadForm(instance=documents)
+            document_upload_form = MastersEducationalDocumentForm(instance=documents)
+            work_experience_form = WorkExperienceForm(instance=work_experience)
+            other_info_form = OtherInfoForm(instance=other)
         else:
-            # Blank forms for new application
+            # New blank forms
             personal_info_form = PersonalInfoForm()
             contact_and_address_form = ContactAndAddressForm()
             educational_form = EducationalBackgroundMastersForm()
@@ -500,14 +492,12 @@ def masters_application(request):
 
     return render(request, 'application/masters_application.html', {
         'personal_info_form': personal_info_form,
-        'documents_upload_form': documents_upload_form,
         'contact_and_address_form': contact_and_address_form,
         'educational_form': educational_form,
+        'documents_upload_form': documents_upload_form,
         'document_upload_form': document_upload_form,
         'work_experience_form': work_experience_form,
         'other_info_form': other_info_form,
-        'application_exists': application_exists,
-        'application': application,
     })
 @login_required(login_url='login')
 def certificate_application(request):

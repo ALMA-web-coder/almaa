@@ -96,11 +96,12 @@
                     {{ other_info_form.as_p }}
                     <button type="button" class="btn btn-secondary prev-step">Previous</button>
                     <button type="submit" class="btn btn-success">Submit Application</button>
-                    <p class="payment-info">Your Application Application ID: {{ application.id }}</p>
-                    <p> Write down and store  the Application ID in your phone or notebook and it will be used to track your application status!</p>  
                 </div>
             </div>
-
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <p class="payment-info">Application ID: {{ application.id }}</p>
+                <p> Write down and store  the Application ID in your phone or notebook and it will be used to track your application status!</p>  
+            </div>
         </div>
 
     </form>
