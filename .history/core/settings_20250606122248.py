@@ -15,21 +15,17 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
 
-
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-i8(-4%4an#y%06n+-zr%e6@d8$^c6ynj=o716fsom9@qk(a$2y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.99', '127.0.0.1', 'alma.ac.zw', 'www.alma.ac.zw']
-
 
 # Application definition
 
@@ -77,11 +73,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-
+"""""
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -96,7 +91,18 @@ DATABASES = {
     }
 }
 
+"""""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'almadb',                
+        'USER': 'Moses',                      
+        'PASSWORD': 'AlmaUfa04028#25;',          
+        'HOST': 'localhost',                  
+        'PORT': '3306',                       
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -116,7 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -127,7 +132,6 @@ TIME_ZONE = 'Africa/Harare'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -170,7 +174,6 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "homepage"
 LOGOUT_REDIRECT_URL = "login"
 
-
 # Email Configurtions to sent Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -191,10 +194,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD'),
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL'),
 """""
 
-
 PAYNOW = {
-  'INTEGRATION_ID' : os.environ.get('PAYNOW_INTEGRATION_ID'),
-  'INTEGRATION_KEY' : os.environ.get('PAYNOW_INTEGRATION_KEY'),
-  'RESULT_URL' : os.environ.get('PAYNOW_RESULT_URL'),
-  'RETURN_URL' : os.environ.get('PAYNOW_RETURN_URL')
+    'INTEGRATION_ID': '20859',
+    'INTEGRATION_KEY': 'daa9e14d-3e50-4fb7-bce3-027678aaffc0',
+    'RESULT_URL': 'http://127.0.0.1:8000/apply/?step=10',
+    'RETURN_URL': 'http://127.0.0.1:8000/apply/?step=10'
 }
