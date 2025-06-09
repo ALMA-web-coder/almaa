@@ -41,11 +41,10 @@ from .forms import (
     OtherInfoForm,
     
 )
-import os
+
 from paynow import Paynow 
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from django.conf import settings
 from django.template.loader import render_to_string
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
@@ -333,10 +332,12 @@ def prepare_uploaded_files(files):
     """Extract file information into a serializable format."""
     return {file.name: {'size': file.size, 'content_type': file.content_type} for file in files.values()}
 
+
 @login_required(login_url='login')
 def masters_application(request):
     user = request.user
     try:
+        # Check if the user already has a 'masters' application
         application = Application.objects.get(user=user, application_type='masters')
         application_exists = True
     except Application.DoesNotExist:
@@ -345,22 +346,24 @@ def masters_application(request):
 
     if request.method == "POST":
         # Prepare related instances safely
-        if application:
-            contact_instance = application.contacts.first() if application.contacts.exists() else None
-            educational_instance = application.educational.first() if application.educational.exists() else None
-            work_experience_instance = application.work_experiences.first() if application.work_experiences.exists() else None
-            other_instance = application.other.first() if application.other.exists() else None
-            document_instance = application.documents.first() if application.documents.exists() else None
-            master_instance = (
-                application.masters.first() if hasattr(application, 'masters') and application.masters.exists() else None
-            )
-        else:
-            contact_instance = None
-            educational_instance = None
-            work_experience_instance = None
-            other_instance = None
-            document_instance = None
-            master_instance = None
+        contact_instance = (
+            application.contacts.first() if application.contacts.exists() else None
+        )
+        educational_instance = (
+            application.educational.first() if application.educational.exists() else None
+        )
+        work_experience_instance = (
+            application.work_experiences.first() if application.work_experiences.exists() else None
+        )
+        other_instance = (
+            application.other.first() if application.other.exists() else None
+        )
+        document_instance = (
+            application.documents.first() if application.documents.exists() else None
+        )
+        master_instance = (
+            application.masters.first() if hasattr(application, 'masters') and application.masters.exists() else None
+        )
 
         # Instantiate forms with POST data and existing instances
         personal_info_form = PersonalInfoForm(
@@ -402,13 +405,19 @@ def masters_application(request):
             work_experience_form.is_valid(),
             other_info_form.is_valid(),
         ]):
-            # Create or update application
+            # Save or update application
             if not application_exists:
+                # Create new application
                 application = Application.objects.create(
                     user=user,
                     application_type='masters',
                     **personal_info_form.cleaned_data
                 )
+
+            else:
+                # Update existing application if needed
+                application = application
+
             # Save related models
             # Save documents upload
             doc = documents_upload_form.save(commit=False)
@@ -447,13 +456,15 @@ def masters_application(request):
             # Create status
             Status.objects.create(application=application, status='Submitted')
 
+            # Redirect to payment
             return redirect('paynow_payment', application_id=application.id)
         else:
+            # Handle form errors
             messages.error(request, 'Please correct the errors in your application data.')
 
     else:
         # Initialize forms with existing data if application exists
-        if application:
+        if application_exists:
             personal_info_form = PersonalInfoForm(instance=application)
             contact_and_address_form = ContactAndAddressForm(
                 instance=application.contacts.first() if application.contacts.exists() else None
@@ -474,14 +485,13 @@ def masters_application(request):
                 application.other.first() if application.other.exists() else None
             )
 
-            # Initialize all forms with existing data
             documents_upload_form = DocumentUploadForm(instance=document_instance)
             educational_form = EducationalBackgroundMastersForm(instance=application.educational.first() if application.educational.exists() else None)
             document_upload_form = MastersEducationalDocumentForm(instance=master_instance)
             work_experience_form = WorkExperienceForm(instance=work_experience_instance)
             other_info_form = OtherInfoForm(instance=other_instance)
         else:
-            # For new application, ensure all forms are initialized
+            # Blank forms for new application
             personal_info_form = PersonalInfoForm()
             contact_and_address_form = ContactAndAddressForm()
             educational_form = EducationalBackgroundMastersForm()
@@ -692,14 +702,13 @@ def download_pdf(request, application_id):
         p.drawString(100, height - 520, f"Work Details: {work_experience.work_details}")
 
     if documents:
-      if documents.birth_certificate:
-        # Get the filename/path relative to MEDIA_ROOT
-        relative_path = 'documents/birth_certificates/' + documents.birth_certificate.name
-        birth_certificate_path = os.path.join(settings.MEDIA_ROOT, relative_path)
-        p.drawString(100, height - 540, "Birth Certificate:")
-        p.drawImage(birth_certificate_path, 100, height - 700, width=200, height=150)
-      else:
-        p.drawString(100, height - 540, "Birth Certificate: Not Provided")
+        if documents.birth_certificate:
+            birth_certificate_path ='/media/'
+            p.drawString(100, height - 540, "Birth Certificate:")
+            #Draw the path to the birth certificate
+            p.drawImage (birth_certificate_path, 100, height - 700, width = 200, height = 150)
+        else:
+            p.drawString(100, height -540, "Birth Certificate: Not Provided")
             
              
 

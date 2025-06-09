@@ -337,6 +337,7 @@ def prepare_uploaded_files(files):
 def masters_application(request):
     user = request.user
     try:
+        # Check if the user already has a 'masters' application
         application = Application.objects.get(user=user, application_type='masters')
         application_exists = True
     except Application.DoesNotExist:
@@ -409,6 +410,8 @@ def masters_application(request):
                     application_type='masters',
                     **personal_info_form.cleaned_data
                 )
+            # else, application already exists
+
             # Save related models
             # Save documents upload
             doc = documents_upload_form.save(commit=False)
@@ -473,15 +476,8 @@ def masters_application(request):
             other_instance = (
                 application.other.first() if application.other.exists() else None
             )
-
-            # Initialize all forms with existing data
-            documents_upload_form = DocumentUploadForm(instance=document_instance)
-            educational_form = EducationalBackgroundMastersForm(instance=application.educational.first() if application.educational.exists() else None)
-            document_upload_form = MastersEducationalDocumentForm(instance=master_instance)
-            work_experience_form = WorkExperienceForm(instance=work_experience_instance)
-            other_info_form = OtherInfoForm(instance=other_instance)
         else:
-            # For new application, ensure all forms are initialized
+            # For new application
             personal_info_form = PersonalInfoForm()
             contact_and_address_form = ContactAndAddressForm()
             educational_form = EducationalBackgroundMastersForm()
