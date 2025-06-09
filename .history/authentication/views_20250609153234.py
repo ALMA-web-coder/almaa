@@ -646,7 +646,104 @@ def registrar_view(request, application_id):
     }) 
     
     
- 
+ def download_pdf(request, application_id):
+    application = get_object_or_404(Application, id=application_id)
+    contact = application.contacts.first()
+    masters_edu = application.educational.first()
+    work_experience = application.work_experiences.first()
+
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    elements = []
+
+    styles = getSampleStyleSheet()
+    # Helper function to create styled section headers
+    def section_header(text):
+        return Paragraph(f'<b>{text}</b>', styles['Heading2'])
+
+    data = []
+
+    # Personal Info Section
+    data.append([section_header('Personal Information'), ''])
+    data.extend([
+        ['First Name', application.first_name],
+        ['Last Name', application.last_name],
+        ['Application Type', application.get_application_type_display()],
+        ['Date of Birth', str(application.date_of_birth)],
+        ['Gender', application.gender],
+        ['National ID', application.national_id],
+        ['Title', application.get_title_display()],
+        ['Marital Status', application.get_marital_status_display()],
+        ['Place of Birth', application.place_of_birth],
+        ['Citizenship', application.citizenship],
+        ['Country', application.country],
+        ['Disability', application.disability],
+        ['Disability Details', application.disability_details],
+    ])
+
+    # Contact Section
+    if contact:
+        data.append([section_header('Contacts'), ''])
+        data.extend([
+            ['Email', contact.email],
+            ['Phone Number', contact.phone_number],
+            ['Permanent Address', contact.permanent_address_no_street],
+        ])
+        if contact.permanent_address_apt_unit:
+            data.append(['Apt/Unit', contact.permanent_address_apt_unit])
+        data.append(['State/Province', contact.permanent_address_state_province])
+
+    # Education Section
+    if masters_edu:
+        data.append([section_header('Educational Background'), ''])
+        data.extend([
+            ['Programme Applied For', masters_edu.get_programme_applied_for_display()],
+            ['Institution', masters_edu.awarding_institution],
+            ['Major Subjects', masters_edu.major_subjects],
+        ])
+
+    # Work Experience Section
+    if work_experience:
+        data.append([section_header('Work Experience'), ''])
+        data.extend([
+            ['Employer', work_experience.employer],
+            ['Work Details', work_experience.work_details],
+        ])
+
+    # Create the table
+    table = Table(data, colWidths=[200, 300])  # adjust widths as needed
+
+    # Style the table
+    style = TableStyle([
+        ('SPAN', (0,0), (-1,0)),  # span header row
+        ('BACKGROUND', (0,0), (-1,0), colors.lightblue),
+        ('ALIGN', (0,0), (-1,0), 'CENTER'),
+        ('TEXTCOLOR', (0,0), (-1,0), colors.black),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0,0), (-1,0), 12),
+        ('BOTTOMPADDING', (0,0), (-1,0), 8),
+        ('LEFTPADDING', (0,0), (-1,0), 4),
+        ('RIGHTPADDING', (0,0), (-1,0), 4),
+        ('TOPPADDING', (0,0), (-1,0), 4),
+        ('BACKGROUND', (0,1), (-1,-1), colors.beige),
+        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
+    ])
+
+    # Apply style to headers
+    # For each section header row (indices 0, after each section), style accordingly
+    # Since we added section headers as Paragraphs, we can style them directly via Paragraphs
+
+    table.setStyle(style)
+    elements.append(table)
+
+    # Build PDF
+    doc.build(elements)
+    buffer.seek(0)
+
+    response = HttpResponse(buffer, content_type='application/pdf')
+    filename = f"{application.first_name}_{application.last_name}.pdf"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
 
 def download_word(request, application_id):
     application = get_object_or_404(Application, id=application_id)
@@ -970,133 +1067,4 @@ def card_payment(request, application_id):
         return render(request, 'application/card_payment.html', context)
     
 
-   
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
-from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from io import BytesIO
-from django.http import HttpResponse
-
-def download_pdf(request, application_id):
-    application = get_object_or_404(Application, id=application_id)
-    contact = application.contacts.first()
-    masters_edu = application.educational.first()
-    work_experience = application.work_experiences.first()
-
-    buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter)
-    styles = getSampleStyleSheet()
-
-    # Define a style for the main heading
-    main_heading_style = ParagraphStyle(
-        name='MainHeading',
-        fontSize=18,
-        leading=22,
-        alignment=1,  # Center alignment
-        spaceAfter=20,
-        fontName='Helvetica-Bold'
-    )
-
-    elements = []
-
-    # Add main heading
-    main_heading = Paragraph("Application Details", main_heading_style)
-    elements.append(main_heading)
-
-    # Add a spacer after heading
-    # (Optional if you want some space between heading and content)
-    # from reportlab.platypus import Spacer
-    # elements.append(Spacer(1, 12))
-
-    # Helper function for section headers
-    def section_header(text):
-        return Paragraph(f'<b>{text}</b>', styles['Heading2'])
-
-    data = []
-
-    # Personal Info Section
-    data.append([section_header('Personal Information'), ''])
-    data.extend([
-        ['First Name', application.first_name],
-        ['Last Name', application.last_name],
-        ['Application Type', application.get_application_type_display()],
-        ['Date of Birth', str(application.date_of_birth)],
-        ['Gender', application.gender],
-        ['National ID', application.national_id],
-        ['Title', application.get_title_display()],
-        ['Marital Status', application.get_marital_status_display()],
-        ['Place of Birth', application.place_of_birth],
-        ['Citizenship', application.citizenship],
-        ['Country', application.country],
-        ['Disability', application.disability],
-        ['Disability Details', application.disability_details],
-    ])
-
-    # Contact Section
-    if contact:
-        data.append([section_header('Contacts'), ''])
-        data.extend([
-            ['Email', contact.email],
-            ['Phone Number', contact.phone_number],
-            ['Permanent Address', contact.permanent_address_no_street],
-        ])
-        if contact.permanent_address_apt_unit:
-            data.append(['Apt/Unit', contact.permanent_address_apt_unit])
-        data.append(['State/Province', contact.permanent_address_state_province])
-
-    # Education Section
-    if masters_edu:
-        data.append([section_header('Educational Background'), ''])
-        data.extend([
-            ['Programme Applied For', masters_edu.get_programme_applied_for_display()],
-            ['Institution', masters_edu.awarding_institution],
-            ['Major Subjects', masters_edu.major_subjects],
-        ])
-
-    # Work Experience Section
-    if work_experience:
-        data.append([section_header('Work Experience'), ''])
-        data.extend([
-            ['Employer', work_experience.employer],
-            ['Work Details', work_experience.work_details],
-        ])
-
-    # Create the table
-    table = Table(data, colWidths=[200, 300])  # adjust as needed
-
-    # Style the table
-    style = TableStyle([
-        ('SPAN', (0,0), (-1,0)),  # span main heading
-        ('BACKGROUND', (0,0), (-1,0), colors.lightblue),
-        ('ALIGN', (0,0), (-1,0), 'CENTER'),
-        ('TEXTCOLOR', (0,0), (-1,0), colors.black),
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0,0), (-1,0), 18),
-        ('BOTTOMPADDING', (0,0), (-1,0), 12),
-        ('LEFTPADDING', (0,0), (-1,0), 4),
-        ('RIGHTPADDING', (0,0), (-1,0), 4),
-        ('TOPPADDING', (0,0), (-1,0), 12),
-        # Style for section headers
-        ('BACKGROUND', (0,1), (-1,1), colors.grey),
-        ('TEXTCOLOR', (0,1), (-1,1), colors.whitesmoke),
-        ('FONTNAME', (0,1), (-1,1), 'Helvetica-Bold'),
-        ('FONTSIZE', (0,1), (-1,1), 14),
-        ('BOTTOMPADDING', (0,1), (-1,1), 8),
-        ('ALIGN', (0,1), (-1,1), 'LEFT'),
-        # Style for data rows
-        ('BACKGROUND', (0,2), (-1,-1), colors.beige),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-    ])
-
-    table.setStyle(style)
-    elements.append(table)
-
-    # Build PDF
-    doc.build(elements)
-    buffer.seek(0)
-
-    response = HttpResponse(buffer, content_type='application/pdf')
-    filename = f"{application.first_name}_{application.last_name}.pdf"
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
-    return response 
+    

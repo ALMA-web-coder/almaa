@@ -94,39 +94,6 @@
     </ul>
 
    
-
-    <h3>Educational Documents</h3>
-{% if application.masters.first %}
-    
-    <ul>
-        <li>Transcript: <a href="{{ application.masters.first.transcript.url }}">{{ application.masters.first.transcript.name }}</a></li>
-        <li>Degree Certificate: <a href="{{ application.masters.first.degree_certificate.url }}">{{ application.masters.first.degree_certificate.name }}</a></li>
-        <li>A level Certificate: <a href="{{ application.masters.first.a_level_certificate.url}}">{{ application.masters.first.a_level_certificate.name}}</a></li>
-        <li>O level Certificate: <a href="{{ application.masters.first.o_level_certificate.url}}">{{ application.masters.first.o_level_certificate.name}}</a></li>
-        <li>CV: <a href="{{ application.masters.first.CV.url}}">{{ application.masters.first.CV.name}}</a></li>
-    </ul>
-    
-{% else %}
-    <li>No Educational Certificates Associated With Masters Programs!</li>
-{% endif %}
-
-
-
-<h3>Educational Documents</h3>
-{% if application.certificate.first %}
-    
-    <ul>
-        <li>A' Level Certificate: <a href="{{ application.certificate.first.a_level_certificate.url }}">{{ application.certificate.first.a_level_certificate.name }}</a></li>
-        <li>O level Certificate: <a href="{{ application.certificate.first.o_level_certificate.url}}">{{ application.certificate.first.o_level_certificate.name}}</a></li>
-        <li>CV: <a href="{{ application.certificate.first.CV.url}}">{{ application.certificate.first.CV.name}}</a></li>
-        
-    </ul>
-    
-{% else %}
-    <li>No Educational Certificates Associated With Certificate Programs!</li>
-{% endif %}
-
-
     
     <h3>WorkExperience</h3>
     <ul>
@@ -151,14 +118,6 @@
     <h3>Other</h3>
     <li>How you hear about ALMA: {{ work.how_did_you_hear_about_ALMA }}</li>
     <li>Adtional Remarks: {{ work.additional_remarks }}</li>
- 
-
-
-    <h3>Status</h3>
-
-    <!-- Show current status -->
-    <p>Last Updated: {{ last_update }}</p>
-    <p>Current Status: {{ status }}</p>
     
     <!-- Form to Update Status -->
     <form method="post" action="{% url 'registrar_view' application.id %}">
