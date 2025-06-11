@@ -91,13 +91,13 @@ custom_admin_site.register(Download, DownloadAdmin)
 
 
 class ApplicationPaymentsAdmin(admin.ModelAdmin):
-    list_display = ('paynow_reference', 'status', 'customer_name', 'customer_email', 'amount', 'created_at')
-    list_filter = ('status', 'payment_type', 'created_at')
-    search_fields = ('paynow_reference', 'customer_name', 'customer_email', 'customer_phone', 'redirect_url')
+    list_display = ('paynow_reference', 'customer_name', 'customer_email', 'amount', 'created_at')
+    list_filter = ('payment_type', 'created_at')
+    search_fields = ('paynow_reference', 'customer_name', 'customer_email', 'customer_phone',)
     readonly_fields = ('created_at',)  # Make created_at read-only
     fieldsets = (
         ('Payment Details', {
-            'fields': ('application', 'paynow_reference', 'status', 'amount', 'reference', 'redirect_url')
+            'fields': ('application', 'paynow_reference', 'amount', )
         }),
         ('Customer Details', {
             'fields': ('customer_name', 'customer_email', 'customer_phone')
@@ -111,13 +111,13 @@ custom_admin_site.register(ApplicationPayments, ApplicationPaymentsAdmin)
 
 
 class GeneralPaymentsAdmin(admin.ModelAdmin):
-    list_display = ('paynow_reference', 'customer_name', 'customer_email', 'amount', 'created_at', 'redirect_url')
-    list_filter = ('payment_type', 'status', 'created_at')
-    search_fields = ('paynow_reference', 'customer_name', 'customer_email', 'customer_phone', 'redirect_url')
+    list_display = ('paynow_reference', 'customer_name', 'customer_email', 'amount', 'created_at', )
+    list_filter = ('payment_type', 'created_at')
+    search_fields = ('paynow_reference', 'customer_name', 'customer_email', 'customer_phone', )
     readonly_fields = ('created_at',)  # Make created_at read-only
     fieldsets = (
         ('Payment Details', {
-            'fields': ('paynow_reference', 'amount', 'reference', 'status', 'redirect_url')
+            'fields': ('paynow_reference', 'amount', 'reference',)
         }),
         ('Customer Details', {
             'fields': ('customer_name', 'customer_email', 'customer_phone')
