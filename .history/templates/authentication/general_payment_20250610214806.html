@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-4">Make a Payment</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="payment_type">Payment Type</label>
+            <select id="payment_type" name="payment_type" required>
+                <option value="fees">FEES PAYMENT</option>
+                <option value="tuition">TUITION PAYMENT</option>
+                <option value="donation">DONATIONS</option>
+                <option value="other">OTHER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="reference">Reference</label>
+            <input type="text" class="form-control" id="reference" name="reference" required>
+        </div>
+        <div class="form-group">
+            <label for="payment_method">Payment Method</label>
+            <select class="form-control" id="payment_method" name="payment_method" required>
+                <option value="mobile">Mobile Payment (Ecocash)</option>
+                <option value="card">Card Payment</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Payment</button>
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock %} 

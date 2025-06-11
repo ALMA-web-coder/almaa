@@ -1,0 +1,58 @@
+img{
+  width: 20%;
+
+}
+
+.navbar-nav {
+    flex-direction: row !important;
+}
+
+
+/* Container for animated year */
+.animated-year {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1px #3876e8;
+  font-weight: bold;
+  animation: display-text 16s linear infinite;
+  /* Optional: delay for variation if multiple years */
+  /* animation-delay: calc(-4s * var(--i)); */
+}
+
+/* The text fill animation */
+.animated-year::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #3876e8;
+  animation: fill-text 4s linear infinite;
+  /* Optional: add delay if needed */
+}
+
+/* Keyframe for text display and stroke animation */
+@keyframes display-text {
+  0%, 25%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Fill text animation */
+@keyframes fill-text {
+  0% {
+    width: 0;
+  }
+  70%, 90% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}

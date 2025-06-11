@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid mt-5 ">
+  <h1>Please complete your payment by entering your pin in<br>
+     <span class="d-flex justify-content-center">your mobile device</span></h1>
+  </div>
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-6">
+      <p>The pin you enter in your mobile device is safe and secure, we do not store your pin or see it.</p>
+      <p>Your pin is hidden from us and any third party, it is only used to confirm and complete your payment.</p>
+      <p>If you have any questions, please contact us at <a href="ict@alma.ac.zw">ict@alma.ac.zw</a>. or navigate to our <a href="{% url 'privacy_policy' %}">privacy_policy</a> page</p>
+      <p>Thank you for your payment.</p>
+    
+    </div>
+    <div class="col-md-6">
+      <img src="{% static 'images/mobilepayment.jpg' %}" alt="Payment Mobile" class="img-fluid">
+    </div>
+  </div> 
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-4">
+    <div class="card border-primary shadow-sm rounded-lg p-4">
+        <h2 class="text-center mb-4" style="color:#1c193e;">Welcome to ALMA Payment Gateway</h2>
+        <p class="text-center mb-4" style="font-size:1.1em;">
+            Please review our <a href="{% url 'privacy_policy' %}" target="_blank" style="color:#1c193e; font-weight:bold;">Privacy Policy</a> to understand how we handle and protect your data.
+        </p>
+        <h4 class="text-center mb-3" style="color:#333;">Important Instructions Before Proceeding</h4>
+        <ul class="list-group list-group-flush mb-4" style="max-width: 800px; margin: 0 auto;">
+            <li class="list-group-item">
+                <strong>Payment Name:</strong> Enter the name of the person making the payment. If paying on behalf of someone else, still input your name. The reference field below should specify the payee's name.
+            </li>
+            <li class="list-group-item">
+                <strong>Reference:</strong> Enter the name of the person the payment is for, including the purpose (e.g., "Fees payment for Tim P").
+            </li>
+            <li class="list-group-item">
+                <strong>Email:</strong> Enter your email address to receive payment notifications.
+            </li>
+            <li class="list-group-item">
+                <strong>Payment Confirmation:</strong> If using Ecocash, you'll be prompted to enter your PIN on your mobile device to confirm the payment. For other methods, you'll be redirected to PayNow to complete the transaction.
+            </li>
+            <li class="list-group-item">
+                <strong>Account Balance:</strong> Ensure your Ecocash account has sufficient balance before proceeding.
+            </li>
+        </ul>
+        <div class="text-center">
+            <a href="{% url 'general_payment' %}" class="btn btn-primary btn-lg">Proceed to Payment</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

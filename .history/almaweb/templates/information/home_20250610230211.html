@@ -1,0 +1,615 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/information/home.css' %}">
+
+         <!-- Font Awesome CDN -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+         <!--Google fomts-->
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+     
+         <!-- Bootstrap core CSS -->
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     
+         
+
+    <title>Africa Leadership and Management Academy (ALMA)</title>
+
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+
+        #news-content {
+            display: none; /* Hidden by default */
+        }
+    
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Change the background of the arrow icons to black */
+        }
+    
+        .carousel-control-prev,
+        .carousel-control-next {
+            filter: invert(1); /* Invert the icon colors to white */
+        }
+
+        .active-link {
+            color:rgb(8, 77, 35) !important;
+        }
+
+       
+
+        .color-link{
+            color: #d9534f !important;
+        }
+    </style>
+</head>
+<body>
+
+        <div class="sub-header  ">
+            <div class="container-fluid" style="background-color:#ad4c67;">
+                <div class="container-fluid">
+                <div class="row mb-3">
+                    <div class="col-lg-8 col-md-8 col-sm-4 d-flex justify-content-center">
+                        <ul class="info">
+                            <li style="list-style: none;"><i class="fa fa-envelope" style="color:rgb(255, 255, 255); text-decoration: none;"></i> <span style="color:rgb(255, 255, 255);">programme@alma.ac.zw</li>
+                                <hr>
+                            <li style="list-style: none;"><i class="fa fa-map" style="color:rgb(255, 255, 255); text-decoration: none;"></i>  <span style="color: rgb(255, 255, 255);">33 Marlborough Dr, Marlborough, Harare,
+                                Zimbabwe</li>
+                        </ul>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    
+           <!-- ***** Header Area Start ***** -->
+           <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:rgba(255, 255, 255, 0.8);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{%url 'almaweb:home'%}">
+                    <img src="{% static 'images/alma.png' %}" class="img" alt="ALMA Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active-link" href="{% url 'almaweb:home' %}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+
+                       <li class="nav-item">
+                            <a class="nav-link color-link" href="#coursesSection"><span style="display:inline;">OurPrograms</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'login' %}">ApplyNow</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link color-link" href="{% url 'almaweb:journals' %}">Journals</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link color-link" href="#newssection">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link color-link" href="{% url 'almaweb:consulting' %}">ConsultancyUnit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link color-link"  href="{% url 'general_payment' %}" target="">Payments</a>
+                        </li>
+
+                        <li class="nav-item active">
+                            <a class="nav-link color-link" href="{% url 'almaweb:about' %}">AboutUs</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- ***** Header Area End ***** -->
+   
+        <section class="container-fluid" id="slide-section" style="height:100vh; overflow: hidden; background-size: cover;background-position: center; position: relative; color: white;">
+            <div class="row">
+                <div class="slide mt-5 position-relative">
+                    <div class="col mt-4 ml-lg-5 ">
+                        <div class="overlay-text position-absolute">
+                            <h1 id="slide-text" style="color:white; white-space: nowrap;">Welcome to 
+                                <br>Africa Leadership <br><span>and Management Academy</span>
+                            </h1>
+                        </div>
+                        <div class="overlay-text position-absolute" style="margin-top:250px; background-color:rgba(58, 52, 52, 0.3); padding: 3px; border-radius: 5px;">
+                            <a href="#coursesSection" style=" color:white;" class="btn"> Our Courses </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+    <!--Card Section-->
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center mb-5">
+            <div class="card" style="margin-top:-40px;  width: 15rem; background-color:#ad4c67;">
+                
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;padding-left:50px; color:white;">
+                        <i class="fas fa-graduation-cap"></i>
+                        Degree Programs</h5>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-md-4 d-flex justify-content-center mb-5" >
+            <div class="card" style=" margin-top:-40px;  width: 15rem; background-color:#ad4c67;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;padding-left:50px; color:white;">
+                        <i class="fas fa-chalkboard-teacher" ></i>
+                        Short Seminar</h5>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-md-4 d-flex justify-content-center mb-5">
+            <div class="card" style="  margin-top:-40px;  width: 15rem; background-color:#ad4c67;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;padding-left:50px; color:white;">
+                        <i class="fas fa-book"></i>
+                        Short Courses</h5>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<section class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 d-flex justify-content-center">
+                <div class="alma-text ">
+            <h2>Welcome to ALMA
+            </h2>
+            <p>Africa Leadership and Management Academy (ALMA) is a leadership school that was born out of a crying need
+               for leaders of integrity to spearhead Africa’s transformation from spiritual, social and moral bankruptcy as well
+               as economic oppression. The idea of starting ALMA was the outcome of a meeting held in December 1994, at
+               the Pan African Christian Leadership Assembly (PACLA II) in Kenya, hosted by the Association of Evangelicals in
+               Africa (AEA). Delegates included Evangelical Christian leaders from all over the continent.
+
+            </p>
+        </div>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+    
+ 
+
+
+    <!--Programms-->
+    
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-lg-11 offset-lg-1">
+                <div class="alma-text">
+            <h2>2025 Postgraduate Registration
+            </h2>
+            <p>Registration is open for Blended Online and Weekend Classes for March 2025.
+               <br>
+            <a href="{% url 'login' %}" target="_blank">
+                <button type="button" class="btn" style="background-color: #ad4c67; color: white;">Apply Now</button>
+            </a>
+               <br>
+                Students can pay their application fees and tuition via paynow link below:         
+            </p>
+           <a  href="{% url 'general_payment' %}" target="_blank">
+            <button type="button" class="btn" style="background-color:#ad4c67; color:white;">Paynow</button>
+           </a>
+        </div>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+
+<!-- Programs -->
+<div id="coursesSection" class="container-fluid" style="background-color: rgba(255, 255, 255, 0.3);">
+    <br>
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1" style="padding-top: 3px; padding-bottom: 1px; background-color: #ad4c67;">
+            <h3><span style="color: white; display: flex; justify-content: center;">Degree & Certificate Programs</span></h3>
+        </div>
+    </div>
+    <hr>
+
+    <div id="coursesCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'images/mbaBG.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: rgb(0, 0, 0);">MBA Leadership & Management Degree (MBALM)</h5>
+                            </div>
+                            <a href="{% url 'almaweb:mba' %}" target="_blank">
+                                <button type="button" class="btn" style="background-color: #ad4c67; color: white; margin-left: 70px; margin-bottom:10px;">Explore Further</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'images/ADMI.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body" style="background-color: rgb(255, 255, 255);">
+                                <h5 class="card-title" style="color: rgb(0, 0, 0);"> Certificate in Agribusiness Development and Management (CADM)</h5>
+                            </div>
+                            <a href="{% url 'almaweb:agribusiness' %}" target="_blank">
+                                <button type="button" class="btn" style="background-color: #ad4c67; color: white; margin-left: 70px;margin-bottom:10px;">Explore Further</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'images/btlgs.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body" style="background-color: rgb(255, 255, 255);">
+                                <h5 class="card-title">Transforming Leadership and Governance Seminars (BTLGS)</h5>
+                            </div>
+                            <a href="{% url 'almaweb:btlgs' %}" target="_blank">
+                                <button type="button" class="btn" style="background-color: #ad4c67; color: white; margin-left: 70px;margin-bottom:10px;">Explore Further</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'images/ILF.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body" style="background-color: rgb(255, 255, 255);">
+                                <h5 class="card-title">ILF's Philosophy of Transforming Leadership</h5>
+
+                            </div>   <a href="{% url 'almaweb:ilf' %}" target="_blank">
+                                <button type="button" class="btn" style="background-color: #ad4c67; color: white; margin-left: 70px;margin-bottom:10px;">Explore Further</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'icons/leadership.jpg' %}" class="card-img-top" alt="leadership icon">
+                            <div class="card-body" style="background-color: rgb(255, 255, 255);">
+                                <h5 class="card-title">Msc. In Governance & Leadership (MSC)</h5>
+                            </div>
+                            <a href="{% url 'almaweb:mgov' %}" target="_blank">
+                                <button type="button" class="btn" style="background-color: #ad4c67; color: white; margin-left: 70px;margin-bottom:10px;">Explore Further</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% static 'images/clmb.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body" style="background-color: rgb(255, 255, 255);">
+                                <h5 class="card-title">Certificate in Leadership and Management (CLM)</h5>
+                            </div>
+                            <a href="{% url 'almaweb:clm' %}" target="_blank">
+                                <button type="button" class="btn" style="background-color: #ad4c67; color: white; margin-left: 70px;margin-bottom:10px;">Explore Further</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#coursesCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#coursesCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!--More Infor section-->
+<!--More Infor section-->
+<section class="container-fluid" style="position: relative;">
+    <img src="{% static 'images/bks.jpg' %}" alt="ALMA" class="img-fluid" style="width:100%; height: 100vh; object-fit: cover; mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));">
+    
+    <div class="row" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
+        <div class="slide">
+            <div class="col text-center pb-5">
+                <div class="inforr">
+                    <h3 style="color: maroon;">Enroll with us Today!</h3>
+                    <p style="color: black;">We are a leadership school that aims at transforming Africa’s future. We offer a variety of courses to suit your needs.</p>
+                    <!-- Add the year with animated effect -->
+                    <h4 style="margin-top:20px; font-size: 2rem;">
+                        The Year is <span class="animated-year" data-text="2025">2025</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+<br>
+
+<!-- Activities -->
+<div class="container-fluid bg-light mt-5 mb3 ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-8 d-flex justify-content-center">
+            <h3 style="color:rgb(243, 142, 171); margin-top:20px;">Prefects Training Program</h3>
+        </div>
+
+        <div class="col-8 d-flex justify-content-center">
+            <p style="color:rgb(243, 142, 171);">Recent Activities</p>
+        </div>
+
+        <!-- Slideshow container -->
+        <div class="col-8 d-flex justify-content-center" style="height:90vh; overflow:hidden;">
+            <img id="slideshow-image" src="{% static 'images/p.JPG' %}" alt="QE image" class="img-fluid" style="width:100%; height:90vh; object-fit:cover; mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)); transition: opacity 1s ease;">
+        </div>
+
+         <div class="col-8 d-flex justify-content-center">
+            <p style="color:rgb(243, 142, 171);">@Alma</p>
+        </div>
+    </div>
+</div>
+<!-- End Of Activities -->
+
+
+  <section class="container-fluid" style="background-color: rgb(253, 187, 206);;">
+    <div class="row" style="height:300px;">
+        <div class="slide mt-5 position-relative">
+            
+                <div class="col mt-4 ml-lg-5 ">
+
+                    <div class="inforr">
+                     
+                </div>
+
+                </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Trusted Partners -->
+
+<section class="container-fluid" style="background-color: #ad4c67; mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)); padding: 40px 0;">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-4">
+            <h3 style="color: white;">Trusted Partners</h3>
+        </div>
+
+        <!-- Card 1 -->
+        <div class="col col-md-4 mb-3 d-flex justify-content-center">
+            <div class="card border-none" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'images/ZACC.jpg'%}" alt="Card image cap" style="height: 200px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <a href="https://www.zim.gov.zw/index.php/en/my-government/government-ministries/commissions/430-zimbabwe-anti-corruption-commission" class="btn btn-primary">Visit</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col col-md-4 mb-3 d-flex justify-content-center">
+            <div class="card border-none" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'images/AIIKS-Logo.jpg' %}" alt="Card image cap" style="height: 200px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <a href="https://aiiks.org/vision-mission-objectives/" class="btn btn-primary">Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid" style="background-color: rgb(253, 187, 206);">
+    <div class="row">
+        <div class="slide mt-5 position-relative">
+            <div class="col mt-4">
+                <div class="inforr">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News Articles -->
+<h1 id="newssection" style="color:rgb(243, 142, 171);" class="text-center my-4">Latest News</h1>
+
+<div class="image-container position-relative">
+    <img src="{% static 'images/coffee.jpg' %}" alt="News" class="img-fluid" style="width:100%; height: 80vh; object-fit: cover; mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));">
+
+    <div class="container position-absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="row">
+            {% for news_item in latest_news %}
+            <div class="col-md-4"> 
+                <div class="card mb-5 mt-5" style="background-color: rgba(255, 255, 255, 0.1);"> 
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news_item.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            By: {{ news_item.author }} on {{ news_item.date_posted }}
+                        </h6>
+                        <p class="card-text">{{ news_item.abstract|truncatewords:30 }}</p>
+                        <a href="{% url 'almaweb:news_detail' news_item.id %}" class="btn" style="color:white; background-color: #ad4c67;">Read more</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<div class="container-fluid bg-light  mt-5 p-3">
+    <div class="row">
+        <div class="col-12  d-flex justify-content-center">
+            <h3 style="color: #ad4c67;"> BULDING LEADERS OF INTEGRITY!</h3>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+    <!-- Footer Structure -->
+    <footer class="container-fluid bg-dark text-light text-center pt-4 pb-4">
+        <div class="row">
+            <div class="col-12">
+                <h4>
+                    <img src="{% static 'images/alma.png' %}" style="width:10%;" alt="Logo">
+                    Africa Leadership and Management Academy (ALMA)
+                </h4>
+                <p>ALMA is a leadership school that aims at transforming Africa’s future.</p>
+            </div>
+            <div class="col-12">
+                <h5>Popular Courses</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-book"></i> Transforming Leadership and Governance Seminars (BTLGS) - $150</li>
+                    <li><i class="fas fa-book"></i> ILF’s Philosophy of Transforming Leadership - $150</li>
+                    <li><i class="fas fa-book"></i> MSc in Governance & Leadership Degree (MGOVL) - $750</li>
+                </ul>
+            </div>
+            <div class="col-12">
+                <h5>Contact Us</h5>
+                <p>We would love to hear from you. Contact us from 9am-4.30pm, every Monday to Friday.</p>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i> Address: 33 Marlborough Dr, Marlborough, Harare, Zimbabwe<br>
+                    <i class="fas fa-phone-alt"></i> Call: +08677 174235<br>
+                    <i class="fas fa-envelope"></i> Email: 
+                    <a href="mailto:programme@alma.ac.zw" class="text-light">programme@alma.ac.zw</a>
+                </p>
+            </div>
+        
+        </div>
+    </footer>
+              <!-- Follow Us Section -->
+              <div class="row" style="background-color: #ad4c67; padding: 20px;">
+                <div class="col-12 d-flex justify-content-center">
+                    <p class="mt-4 text-light">&copy; 2023 ALMA. All Rights Reserved.</p>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <p class="text-light mb-1">Follow us on:</p>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <a href="https://www.facebook.com/alma.harare" class="text-light mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/feed/" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+</div>
+
+
+    
+<script>
+    const texts = [
+        "Building Leaders of Integrity",
+        "Leaders of Integrity<br><span>Integrity</span>",
+    ];
+
+    const images = [
+        "{% static 'images/library.jpg' %}",
+        "{% static 'images/library2.jpg' %}",
+    ];
+    
+    let currentIndex = 0;
+
+    function changeTextAndBackground() {
+        // Update text
+        currentIndex = (currentIndex + 1) % texts.length; // Cycle through the texts
+        document.getElementById('slide-text').innerHTML = texts[currentIndex];
+
+        // Update background image
+        document.getElementById('slide-section').style.backgroundImage = `linear-gradient(0deg,rgba(255, 0, 0, 0.1),rgba(173, 76, 103,0.7)), url('${images[currentIndex]}')`;
+    }
+
+    // Change text and background every 5 seconds
+    setInterval(changeTextAndBackground, 5000);
+
+     
+    //ACTIVITIES SLIDESHOW
+        document.addEventListener('DOMContentLoaded', () => {
+    // List of images for the slideshow
+    const images = [
+        "{% static 'images/p.JPG' %}",
+        "{% static 'images/1.jpg' %}",
+         "{% static 'images/12.jpg' %}",
+        "{% static 'images/2.jpg' %}",
+        "{% static 'images/3.JPG' %}",
+        "{% static 'images/4.jpg' %}",
+        "{% static 'images/5.jpg' %}",
+        "{% static 'images/6.JPG' %}",
+        "{% static 'images/10.jpg' %}",
+        "{% static 'images/7.jpg' %}",
+        "{% static 'images/11.jpg' %}",
+        "{% static 'images/8.jpg' %}",
+        "{% static 'images/9.JPG' %}",
+        
+        
+       
+    ];
+
+    const imgElement = document.getElementById('slideshow-image');
+    if (!imgElement) {
+      console.error('Slideshow image element not found!');
+      return;
+    }
+
+    let currentIndex = 0;
+
+    function showNextImage() {
+        // Fade out
+        imgElement.style.opacity = 0;
+
+        setTimeout(() => {
+            // Change src
+            currentIndex = (currentIndex + 1) % images.length;
+            imgElement.src = images[currentIndex];
+
+            // Fade in
+            imgElement.style.opacity = 1;
+        }, 500);
+    }
+
+    // Start the slideshow
+    setInterval(showNextImage, 4000);
+});
+    //ACTIVITIES SLIDESHOW END
+    </script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

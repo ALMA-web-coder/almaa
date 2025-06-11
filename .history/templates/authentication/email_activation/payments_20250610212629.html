@@ -1,0 +1,32 @@
+{% extends base.html%}
+{% load static%}
+
+{% block content%}
+
+<div class="row">
+<div class="col-md-6 mt-3" style="border: 2px solid #1c193e; padding: 20px; border-radius: 5px;">
+                <h4 class="text-center">Please read the Instructions below before proceeding with the payment</h4>
+                <p>
+                    <ul> 
+                        <li>
+                            Enter the name of the person who is making the payment on the name field! <br> If you are paying for yourself, enter your name, if you are paying for someone else you still enter your name,<br>
+                             you will then reference the name of the person you are paying for in the reference field below!
+                        </li>
+                        <li>
+                            In the reference field, enter the name of the person who the payment is for specifying the payment type, (eg. Fees payment for Tim P)!
+                        </li>
+                        <li>
+                            The email field is where you will receive the payment notification!
+                        </li>
+                        <li>You will be prompted to enter your pin to confirm the payment on your mobile device if you choose Ecocash payment_method<br>
+                             else you will be redirected to paynow to complete the payment</li>
+                        <br>
+                        <li>Ensure you have enough balance in your Ecocash account</li>
+                        <br>
+    
+    
+                    </ul>
+                </p>
+            </div>
+          </div>
+{% endblock%}

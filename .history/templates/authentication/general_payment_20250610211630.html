@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-4">Make a Payment</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mt-3" style="border: 2px solid #1c193e; padding: 20px; border-radius: 5px;">
+                <h4 class="text-center">Please read the Instructions below before proceeding with the payment</h4>
+                <p>
+                    <ul> 
+                        <li>
+                            Enter the name of the person who is making the payment on the name field! <br> If you are paying for yourself, enter your name, if you are paying for someone else you still enter your name,<br>
+                             you will then reference the name of the person you are paying for in the reference field below!
+                        </li>
+                        <li>
+                            In the reference field, enter the name of the person who the payment is for specifying the payment type, (eg. Fees payment for Tim P)!
+                        </li>
+                        <li>
+                            The email field is where you will receive the payment notification!
+                        </li>
+                        <li>You will be prompted to enter your pin to confirm the payment on your mobile device if you choose Ecocash payment_method<br>
+                             else you will be redirected to paynow to complete the payment</li>
+                        <br>
+                        <li>Ensure you have enough balance in your Ecocash account</li>
+                        <br>
+    
+    
+                    </ul>
+                </p>
+            </div>
+            <div class="col-md-6">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="payment_type">Payment Type</label>
+            <select id="payment_type" name="payment_type" required>
+                <option value="fees">FEES PAYMENT</option>
+                <option value="tuition">TUITION PAYMENT</option>
+                <option value="donation">DONATIONS</option>
+                <option value="other">OTHER</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="reference">Reference</label>
+            <input type="text" class="form-control" id="reference" name="reference" required>
+        </div>
+        <div class="form-group">
+            <label for="payment_method">Payment Method</label>
+            <select class="form-control" id="payment_method" name="payment_method" required>
+                <option value="mobile">Mobile Payment (Ecocash)</option>
+                <option value="card">Card Payment</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Payment</button>
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock %} 
