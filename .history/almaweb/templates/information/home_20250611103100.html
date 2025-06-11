@@ -430,58 +430,38 @@
 <br>
 
 <!-- Activities -->
-
+<!-- Activities -->
 <div class="container-fluid bg-light mt-5 mb-3">
-  <h2 class="text-center my-4">Gallery</h2>
-  <!-- Gallery Grid -->
-  <div class="row d-flex flex-wrap justify-content-center" id="gallery">
-    <!-- Sample images; replace these URLs with your actual images -->
-    <!-- Repeat or dynamically generate images for your gallery -->
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/1.jpg'%}" alt="Image 1" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/2.jpg'%}" alt="Image 2" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/3.jpg'%}" alt="Image 3" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/4.jpg'%}" alt="Image 4" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/5.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/6.jpg'%}" alt="Image 4" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/7.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/8.jpg'%}" alt="Image 4" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/9.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/10.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <!-- Add as many images as needed -->
-  </div>
-</div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-8 text-center">
+            <h3 style="color:rgb(243, 142, 171); margin-top:20px;">Prefects Training Program</h3>
+        </div>
 
-<!-- Bootstrap Modal for enlarged images -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content bg-dark">
-      <div class="modal-body p-0 position-relative">
-        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-        <img src="" class="img-fluid w-100" id="modalImage" alt="Enlarged Image">
-      </div>
+        <div class="col-8 text-center">
+            <p style="color:rgb(243, 142, 171);">Recent Activities</p>
+        </div>
+
+        <!-- Gallery of images -->
+        <div class="col-12 d-flex flex-wrap justify-content-center mt-4">
+            <!-- Example images -->
+            <div class="gallery-item m-2">
+                <img src="{% static 'gallery/1.jpg' %}" alt="Gallery Image 1" class="img-fluid gallery-img">
+            </div>
+            <div class="gallery-item m-2">
+                <img src="{% static 'gallery/2.jpg' %}" alt="Gallery Image 2" class="img-fluid gallery-img">
+            </div>
+            <div class="gallery-item m-2">
+                <img src="{% static 'gallery/3.JPG' %}" alt="Gallery Image 3" class="img-fluid gallery-img">
+            </div>
+            <!-- Add more images as needed -->
+        </div>
+
+        <div class="col-8 d-flex justify-content-center mt-4">
+            <p style="color:rgb(243, 142, 171);">@Alma</p>
+        </div>
     </div>
-  </div>
 </div>
+<!-- End Of Activities -->
 
 
   <section class="container-fluid" style="background-color: rgb(253, 187, 206);">
@@ -654,22 +634,7 @@
     // Change text and background every 5 seconds
     setInterval(changeTextAndBackground, 5000);
 
-    
-      
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-    const galleryImages = document.querySelectorAll('.gallery-img');
-    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-    const modalImg = document.getElementById('modalImage');
-
-    galleryImages.forEach(img => {
-      img.addEventListener('click', () => {
-        modalImg.src = img.src; // Set clicked image source
-        modal.show(); // Show modal
-      });
-    });
-  });
+     
     
     </script>
 

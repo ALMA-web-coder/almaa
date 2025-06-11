@@ -435,43 +435,23 @@
   <h2 class="text-center my-4">Gallery</h2>
   <!-- Gallery Grid -->
   <div class="row d-flex flex-wrap justify-content-center" id="gallery">
-    <!-- Sample images; replace these URLs with your actual images -->
-    <!-- Repeat or dynamically generate images for your gallery -->
+    <!-- Replace these with your image paths or generate dynamically -->
+    <!-- Example static images -->
+    <!-- Repeat or generate images for large galleries -->
+    <!-- For demonstration, I'm repeating some images; replace with your actual image URLs -->
+    {% for i in 1..50 %}
     <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/1.jpg'%}" alt="Image 1" class="img-fluid gallery-img" loading="lazy">
+      <img src="{% static 'gallery/' + i|string + '.jpg' %}" 
+           alt="Gallery Image {{ i }}" 
+           class="img-fluid gallery-img" 
+           loading="lazy" 
+           style="cursor:pointer;">
     </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/2.jpg'%}" alt="Image 2" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/3.jpg'%}" alt="Image 3" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/4.jpg'%}" alt="Image 4" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/5.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/6.jpg'%}" alt="Image 4" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/7.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/8.jpg'%}" alt="Image 4" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/9.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 m-2">
-      <img src="{% static 'gallery/10.jpg'%}" alt="Image 5" class="img-fluid gallery-img" loading="lazy">
-    </div>
-    <!-- Add as many images as needed -->
+    {% endfor %}
   </div>
 </div>
 
-<!-- Bootstrap Modal for enlarged images -->
+<!-- Bootstrap Modal for enlarged image -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-dark">
